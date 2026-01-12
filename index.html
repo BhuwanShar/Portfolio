@@ -5,158 +5,271 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Bhuwan Sharma | Computational Bioinformatics</title>
   <link rel="stylesheet" href="style.css"/>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Montserrat:wght@700&family=Fira+Mono&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
   <div class="background-pattern"></div>
+  <div class="floating-shapes">
+    <div class="shape shape-1"></div>
+    <div class="shape shape-2"></div>
+    <div class="shape shape-3"></div>
+  </div>
 
   <main>
     <!-- Hero Section -->
-    <section class="hero-section glass">
+    <section class="hero-section glass no-break">
       <div class="profile-wrapper">
         <div class="avatar-container">
+          <div class="avatar-ring"></div>
           <img src="https://avatars.githubusercontent.com/BhuwanShar" alt="Profile photo of Bhuwan Sharma"/>
+          <div class="status-indicator" title="Open to opportunities"></div>
         </div>
         <div class="intro-text">
-          <h1>Bhuwan Sharma <span class="dna-icon" title="Bioinformatics Researcher">🧬</span></h1>
-          <h2>Bioinformatics | Computational Biology | Machine Learning</h2>
+          <div class="name-badge">
+            <span class="available-tag"><i class="fas fa-circle"></i> Research enthusiast </span>
+          </div>
+          <h1>Bhuwan Sharma <span class="dna-icon" title="Bioinformatics Researcher"><i class="fas fa-dna"></i></span></h1>
+          <h2>Bioinformatics · Computational Biology · Deep Learning</h2>
           <p class="lead">
-            M.Sc. Bioinformatics, University of North Bengal. Focused on 
+            M.Sc. Bioinformatics, researcher specializing in 
             <strong>gene regulatory network inference</strong>, 
             <strong>graph neural architectures</strong>, and 
-            <strong>transformer-based biological embeddings</strong> for predictive and systems-level understanding of omics data.
+            <strong>transformer-based biological embeddings</strong> for predictive systems-level understanding of multi-omics data.
           </p>
           <div class="contact-links">
-            <a href="mailto:bhuwangautam09@gmail.com" title="Email">📧 bhuwangautam09@gmail.com</a>
-            <a href="https://github.com/BhuwanShar" target="_blank" title="GitHub">💻 github.com/BhuwanShar</a>
-            <a href="https://www.linkedin.com/in/bhuwansharma2002" target="_blank" title="LinkedIn">🔗 LinkedIn</a>
+            <a href="mailto:bhuwangautam09@gmail.com" title="Email" class="contact-btn">
+              <i class="fas fa-envelope"></i> 
+              <span>bhuwangautam09@gmail.com</span>
+            </a>
+            <a href="https://github.com/BhuwanShar" target="_blank" title="GitHub" class="contact-btn">
+              <i class="fab fa-github"></i> 
+              <span>GitHub</span>
+            </a>
+            <a href="https://www.linkedin.com/in/bhuwansharma2002" target="_blank" title="LinkedIn" class="contact-btn">
+              <i class="fab fa-linkedin"></i> 
+              <span>LinkedIn</span>
+            </a>
           </div>
         </div>
       </div>
     </section>
 
     <!-- About -->
-    <section class="glass">
-      <h3>📌 About</h3>
-      <p>
-        Cross-domain researcher passionate about designing computational frameworks 
-        that bridge biological complexity with modern machine intelligence.  
-        My work integrates <strong>graph representation learning</strong>, 
-        <strong>multi-omics modeling</strong>, and 
-        <strong>transformer-based embeddings</strong> to advance network-level understanding in biology.
+    <section class="glass no-break">
+      <h3><i class="fas fa-user-graduate"></i> Professional Summary</h3>
+      <p class="about-text">
+        Cross-disciplinary computational biologist with expertise in designing analytical frameworks 
+        that bridge biological complexity machine intelligence. My research integrates 
+        <strong>graph representation learning</strong>, <strong>multi-omics modeling</strong>, and 
+        <strong>transformer-based embeddings</strong> to advance network-level understanding in molecular biology 
+        and accelerate biomarker discovery pipelines.
       </p>
     </section>
 
     <!-- Education -->
-    <section class="glass">
-      <h3>🎓 Education</h3>
+    <section class="glass no-break">
+      <h3><i class="fas fa-graduation-cap"></i> Education</h3>
       <div class="timeline">
         <div class="timeline-item">
-          <div class="dot"></div>
-          <div class="content">
-            <div class="degree">M.Sc. Bioinformatics</div>
-            <div class="inst">University of North Bengal <span class="badge">Completed</span></div>
+          <div class="timeline-marker">
+            <i class="fas fa-university"></i>
+          </div>
+          <div class="timeline-content">
+            <div class="timeline-header">
+              <span class="degree">M.Sc. Bioinformatics</span>
+              <span class="year-badge">2023 - 2025</span>
+            </div>
+            <div class="institution">University of North Bengal</div>
+            <div class="edu-details">
+              <span class="badge success"><i class="fas fa-check-circle"></i> Completed</span>
+            </div>
+            <p class="edu-desc"> Trained in computational systems biology, with a strong emphasis on machine learning–driven analysis of high-dimensional data</p>
           </div>
         </div>
         <div class="timeline-item">
-          <div class="dot"></div>
-          <div class="content">
-            <div class="degree">B.Sc. Zoology (Honours)</div>
-            <div class="inst">Kalimpong College — University of North Bengal <span class="badge">CGPA 7.64</span></div>
+          <div class="timeline-marker">
+            <i class="fas fa-university"></i>
+          </div>
+          <div class="timeline-content">
+            <div class="timeline-header">
+              <span class="degree">B.Sc. Zoology (Honours)</span>
+              <span class="year-badge">2020 - 2023</span>
+            </div>
+            <div class="institution">Kalimpong College — University of North Bengal</div>
+            <div class="edu-details">
+              <span class="badge primary"><i class="fas fa-star"></i> CGPA: 7.64</span>
+            </div>
+            <p class="edu-desc">Strong foundation in biological sciences with emphasis on molecular biology and genetics.</p>
           </div>
         </div>
       </div>
     </section>
 
     <!-- Research Interests -->
-    <section class="glass">
-      <h3>🔬 Research Interests</h3>
-      <ul class="bullets">
-        <li>Gene Regulatory Networks — inference, dynamics, and topological characterization</li>
-        <li>Graph Machine Learning — <strong>GCN, GATv2, PyTorch Geometric</strong> for biological networks</li>
-        <li>Transformer Models — DNABERT, GO-BERT, BioBERT for biological sequence and ontology embedding</li>
-        <li>Integrative Omics — combining expression data, GO annotations, and topology</li>
-        <li>Representation Learning — feature engineering from sequence and functional ontologies</li>
-      </ul>
+    <section class="glass no-break">
+      <h3><i class="fas fa-microscope"></i> Research Interests</h3>
+      <div class="research-grid">
+        <div class="research-card">
+          <div class="research-icon"><i class="fas fa-project-diagram"></i></div>
+          <h4>Gene Regulatory Networks</h4>
+          <p>Inference, dynamics modeling, and topological characterization of biological networks</p>
+        </div>
+        <div class="research-card">
+          <div class="research-icon"><i class="fas fa-brain"></i></div>
+          <h4>Graph Machine Learning</h4>
+          <p>GCN, GATv2, PyTorch Geometric applications for biological network analysis</p>
+        </div>
+        <div class="research-card">
+          <div class="research-icon"><i class="fas fa-robot"></i></div>
+          <h4>Transformer Models</h4>
+          <p>DNABERT, GO-BERT, BioBERT for sequence and ontology embedding</p>
+        </div>
+        <div class="research-card">
+          <div class="research-icon"><i class="fas fa-layer-group"></i></div>
+          <h4>Integrative Omics</h4>
+          <p>Multi-modal data fusion combining expression, annotations, and topology</p>
+        </div>
+      </div>
     </section>
 
     <!-- Skills -->
-    <section class="glass">
-      <h3>🧠 Technical Expertise</h3>
-      <div class="skills-grid">
-        <div class="skill-card">
-          <span class="icon">🐍</span>
-          <div>
-            <div class="title">Programming</div>
-            <div class="desc">Python, R, Bash, C, Java</div>
+    <section class="glass no-break">
+      <h3><i class="fas fa-cogs"></i> Technical Expertise</h3>
+      <div class="skills-container">
+        <div class="skill-category">
+          <h4><i class="fas fa-code"></i> Programming Languages</h4>
+          <div class="skill-tags">
+            <span class="skill-tag primary">Python</span>
+            <span class="skill-tag primary">R</span>
+            <span class="skill-tag secondary">Bash</span>
+            <span class="skill-tag secondary">C</span>
+            <span class="skill-tag secondary">Java</span>
           </div>
         </div>
-        <div class="skill-card">
-          <span class="icon">🔬</span>
-          <div>
-            <div class="title">Bioinformatics Tools</div>
-            <div class="desc">limma, DESeq2, clusterProfiler, biomaRt, igraph</div>
+        <div class="skill-category">
+          <h4><i class="fas fa-flask"></i> Bioinformatics Tools</h4>
+          <div class="skill-tags">
+            <span class="skill-tag bio">limma</span>
+            <span class="skill-tag bio">DESeq2</span>
+            <span class="skill-tag bio">clusterProfiler</span>
+            <span class="skill-tag bio">biomaRt</span>
           </div>
         </div>
-        <div class="skill-card">
-          <span class="icon">🤖</span>
-          <div>
-            <div class="title">Machine Learning</div>
-            <div class="desc">PyTorch, scikit-learn, transformers, PyTorch Geometric</div>
+        <div class="skill-category">
+          <h4><i class="fas fa-robot"></i> Machine Learning</h4>
+          <div class="skill-tags">
+            <span class="skill-tag ml">PyTorch</span>
+            <span class="skill-tag ml">scikit-learn</span>
+            <span class="skill-tag ml">Transformers</span>
+            <span class="skill-tag ml">PyTorch Geometric</span>
           </div>
         </div>
-        <div class="skill-card">
-          <span class="icon">🧩</span>
-          <div>
-            <div class="title">Systems & Tools</div>
-            <div class="desc">Linux, Git, Conda, CUDA, Jupyter</div>
+        <div class="skill-category">
+          <h4><i class="fas fa-server"></i> Systems & Tools</h4>
+          <div class="skill-tags">
+            <span class="skill-tag tools">Linux</span>
+            <span class="skill-tag tools">Git</span>
+            <span class="skill-tag tools">Conda</span>
+            <span class="skill-tag tools">CUDA</span>
+            <span class="skill-tag tools">Jupyter</span>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Projects -->
-    <section class="glass">
-      <h3>🚀 Work experience </h3>
-      <ul class="bullets">
-        <li><strong>Graph-based Biomarker Discovery:</strong> Working with hybrid Graph Neural Network (GNN) archetecture modelling for biomarker prediction using transcriptomic networks.</li>
-        <li><strong>GO-BERT Embeddings:</strong> Fine-tuned transformer on GO term descriptions for ontology-level representation learning.</li>
-        <li><strong>Principal Component Network (PCnet):</strong> CUDA-optimized implementation for gene regulatory network inference.</li>
-        <li><strong>Biomarker Graph Pipeline:</strong> Integrated DNA-BERT, GO-BERT, and node metadata for GNN-based node classification.</li>
-      </ul>
+    <!-- Projects / Work Experience -->
+    <section class="glass no-break">
+      <h3><i class="fas fa-briefcase"></i> Research Experience & Projects</h3>
+      <div class="projects-list">
+        <div class="project-item">
+          <div class="project-header">
+            <span class="project-title">Graph-based Biomarker Discovery</span>
+            <span class="project-status ongoing">Ongoing</span>
+          </div>
+          <p class="project-desc">Working on hybrid Graph Neural Network (GNN) architecture for biomarker classification.</p>
+          <div class="project-tech">
+            <span>PyTorch Geometric</span>
+            <span>GCNconvo</span>
+            <span>NetworkX</span>
+          </div>
+        </div>
     </section>
 
     <!-- Strengths -->
-    <section class="glass">
-      <h3>🌟 Core Strengths</h3>
-      <div class="chips">
-        <span>Analytical Rigor</span>
-        <span>Research Design</span>
-        <span>Cross-domain Thinking</span>
-        <span>Computational Optimization</span>
-        <span>Scientific Writing</span>
-        
+    <section class="glass no-break">
+      <h3><i class="fas fa-award"></i> Core Competencies</h3>
+      <div class="competencies-grid">
+        <div class="competency-item">
+          <i class="fas fa-search"></i>
+          <span>Analytical Rigor</span>
+        </div>
+        <div class="competency-item">
+          <i class="fas fa-drafting-compass"></i>
+          <span>Research Design</span>
+        </div>
+        <div class="competency-item">
+          <i class="fas fa-exchange-alt"></i>
+          <span>Cross-domain Thinking</span>
+        </div>
+        <div class="competency-item">
+          <i class="fas fa-tachometer-alt"></i>
+          <span>Computational Optimization</span>
+        </div>
+        <div class="competency-item">
+          <i class="fas fa-pen-fancy"></i>
+          <span>Scientific Writing</span>
+        </div>
+        <div class="competency-item">
+          <i class="fas fa-users"></i>
+          <span>Team Collaboration</span>
+        </div>
       </div>
     </section>
 
-    <!-- Connect -->
-    <section class="glass">
-      <h3>🤝 Collaboration Interests</h3>
-      <ul class="bullets">
-        <li>Graph neural networks in systems biology</li>
-        <li>Transformer models for omics interpretation</li>
-        <li>Network-based biomarker prediction</li>
-      </ul>
-      <p class="lead">
-        Always open for discussions and collaborative research.
-        Reach out at <a href="mailto:bhuwangautam09@gmail.com">bhuwangautam09@gmail.com</a>.
-      </p>
+    <!-- Collaboration -->
+    <section class="glass no-break collaboration-section">
+      <h3><i class="fas fa-handshake"></i> Open for Collaboration</h3>
+      <div class="collab-content">
+        <div class="collab-interests">
+          <h4>Areas of Interest</h4>
+          <ul class="collab-list">
+            <li><i class="fas fa-check"></i> Graph neural networks in systems biology</li>
+            <li><i class="fas fa-check"></i> Transformer models for omics interpretation</li>
+            <li><i class="fas fa-check"></i> Network-based biomarker prediction</li>
+            <li><i class="fas fa-check"></i> Multi-omics data integration</li>
+          </ul>
+        </div>
+        <div class="collab-cta">
+          <p>Interested in collaborative research or have a project in mind?</p>
+          <a href="mailto:bhuwangautam09@gmail.com" class="cta-button">
+            <i class="fas fa-envelope"></i> Get In Touch
+          </a>
+        </div>
+      </div>
     </section>
 
     <footer>
-      <span>Last Updated: November 2025</span> · <a href="https://github.com/BhuwanShar" target="_blank">GitHub</a>
+      <div class="footer-content">
+        <div class="footer-info">
+          <span><i class="fas fa-calendar-alt"></i> Last Updated: November 2025</span>
+          <span class="divider">|</span>
+          <span><i class="fas fa-map-marker-alt"></i> West Bengal, India</span>
+        </div>
+        <div class="footer-links">
+          <a href="https://github.com/BhuwanShar" target="_blank"><i class="fab fa-github"></i></a>
+          <a href="https://www.linkedin.com/in/bhuwansharma2002" target="_blank"><i class="fab fa-linkedin"></i></a>
+          <a href="mailto:bhuwangautam09@gmail.com"><i class="fas fa-envelope"></i></a>
+        </div>
+      </div>
+      <p class="copyright">© 2025 Bhuwan Sharma. Crafted with passion for science.</p>
     </footer>
   </main>
+
+  <!-- Print Button -->
+  <button class="print-btn no-print" onclick="window.print()" title="Print CV">
+    <i class="fas fa-print"></i>
+  </button>
 </body>
 </html>
 
