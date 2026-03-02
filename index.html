@@ -1,149 +1,616 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="A comprehensive bioinformatics knowledge archive with interactive decision trees, reproducible workflows, and step-by-step guides.">
-    <meta name="author" content="Bhuwan Sharma">
-    <title>Bioinformatics Knowledge Archive | Bhuwan Sharma</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Bhuwan Sharma | Computational Biology</title>
+    <link rel="stylesheet" href="style.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- LOADER -->
-    <div class="loader-overlay" id="loader">
-        <div class="loader-content">
-            <div class="dna-helix">
-                <div class="strand strand-1"></div>
-                <div class="strand strand-2"></div>
-            </div>
-            <p class="loader-text">Loading Knowledge Archive...</p>
+
+<!-- LOADING SCREEN -->
+<div id="loader">
+    <div class="loader-content">
+        <div class="loader-cell" id="loaderCell">
+            <canvas id="loaderCanvas" width="200" height="200"></canvas>
+        </div>
+        <div class="loader-equation">
+            <span class="loader-matrix" id="loaderL">A</span>
+            <span class="loader-op">=</span>
+            <span class="loader-matrix" id="loaderD">U</span>
+            <span class="loader-op" id ="loaderB">Σ</span>
+            <span class="loader-matrix" id="loaderA">Vᵀ</span>
+        </div>
+        <div class="loader-bar-container">
+            <div class="loader-bar" id="loaderBar"></div>
+        </div>
+        <div class="loader-status" id="loaderStatus">
+            <span class="loader-phase" id="loaderPhase">initializing membrane potential</span>
+            <span class="loader-dots">...</span>
         </div>
     </div>
+</div>
 
-    <!-- HEADER -->
-    <header class="header" id="header">
-        <div class="header-inner">
-            <div class="header-brand">
-                <div class="brand-icon"></div>
-                <div class="brand-text">
-                    <h1>Bioinformatics Knowledge Archive</h1>
-                    <p class="brand-subtitle">Interactive Decision Tree &amp; Reproducible Workflow Guide</p>
+<!-- BACKGROUND CANVAS -->
+<canvas id="networkCanvas"></canvas>
+
+<!-- CHROMOSOME SCROLL INDICATOR -->
+<div class="chromo-scroll" id="chromoScroll">
+    <canvas id="chromoCanvas" width="32" height="600"></canvas>
+    <div class="chromo-marker" id="chromoMarker"></div>
+</div>
+
+<!-- NAVIGATION -->
+<nav id="specNav" class="spec-nav">
+    <div class="nav-label">NAVIGATE</div>
+    <a href="#hero" class="nav-item active" data-section="hero">
+        <span class="nav-dot"></span>
+        <span class="nav-text">Home</span>
+    </a>
+    <a href="#about" class="nav-item" data-section="about">
+        <span class="nav-dot"></span>
+        <span class="nav-text">Background</span>
+    </a>
+    <a href="#research" class="nav-item" data-section="research">
+        <span class="nav-dot"></span>
+        <span class="nav-text">Research</span>
+    </a>
+    <a href="#projects" class="nav-item" data-section="projects">
+        <span class="nav-dot"></span>
+        <span class="nav-text">Projects</span>
+    </a>
+    <a href="#skills" class="nav-item" data-section="skills">
+        <span class="nav-dot"></span>
+        <span class="nav-text">Skills</span>
+    </a>
+    <a href="#approach" class="nav-item" data-section="approach">
+        <span class="nav-dot"></span>
+        <span class="nav-text">Approach</span>
+    </a>
+    <a href="#spectral" class="nav-item" data-section="spectral">
+        <span class="nav-dot"></span>
+        <span class="nav-text">Spectral</span>
+    </a>
+    <a href="#contact" class="nav-item" data-section="contact">
+        <span class="nav-dot"></span>
+        <span class="nav-text">Contact</span>
+    </a>
+</nav>
+
+<!-- MOBILE NAV TOGGLE -->
+<button id="navToggle" class="nav-toggle" aria-label="Toggle navigation">
+    <span></span><span></span><span></span>
+</button>
+
+<!-- MAIN CONTENT -->
+<main id="mainContent">
+
+    <!-- HERO -->
+    <section id="hero" class="section hero-section">
+        <div class="hero-grid">
+            <div class="hero-text">
+                <div class="hero-overline">
+                    <span class="overline-helix">
+                        <canvas id="overlineHelix" width="24" height="24"></canvas>
+                    </span>
+                    <span>Computational & Systems Biology</span>
+                </div>
+                <h1 class="hero-name" id="heroName">
+                    <span class="name-line">Bhuwan</span>
+                    <span class="name-line">Sharma</span>
+                </h1>
+                <p class="hero-subtitle">
+                    Spectral Methods · Network Computation · Systems Biology
+                </p>
+                <p class="hero-description">
+                    I work on grounded approaches for modeling biological systems -
+                    extracting structure from high-dimensional data through decomposition,
+                    graph theory, and principled computation.
+                </p>
+
+                <div class="hero-profile">
+                    <div class="hero-avatar">
+                        <div class="avatar-ring">
+                            <canvas id="avatarRingCanvas" width="96" height="96"></canvas>
+                        </div>
+                        <img src="https://avatars.githubusercontent.com/BhuwanShar" alt="Bhuwan Sharma" id="heroAvatar"/>
+                    </div>
+                    <div class="hero-links">
+                        <a href="mailto:bhuwangautam09@gmail.com" class="hero-link">
+                            <span class="link-icon">✉</span>
+                            <span>bhuwangautam09@gmail.com</span>
+                        </a>
+                        <a href="https://github.com/BhuwanShar" target="_blank" class="hero-link">
+                            <span class="link-icon">⟨/⟩</span>
+                            <span>GitHub</span>
+                        </a>
+                        <a href="https://www.linkedin.com/in/bhuwansharma2002" target="_blank" class="hero-link">
+                            <span class="link-icon">in</span>
+                            <span>LinkedIn</span>
+                        </a>
+                    </div>
                 </div>
             </div>
-            <div class="header-actions">
-                <div class="search-container">
-                    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
-                    </svg>
-                    <input type="text" id="searchInput" placeholder="Search tools, methods, concepts..." autocomplete="off" spellcheck="false">
-                    <kbd class="search-kbd">Ctrl+K</kbd>
+            <div class="hero-viz">
+                <canvas id="eigenCanvas" width="560" height="520"></canvas>
+                <div class="viz-caption">
+                    <span class="viz-live-dot"></span>
+                    Gene regulatory network · Live eigendecomposition
                 </div>
-                <button class="btn-icon" id="themeToggle" title="Toggle theme">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
-                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-                    </svg>
-                </button>
-                <a href="https://github.com/BhuwanShar/" target="_blank" class="btn-icon" title="GitHub">
-                    <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
-                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                    </svg>
+            </div>
+        </div>
+
+        <!-- Floating gene bits -->
+        <div class="gene-stream" id="geneStream"></div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="section">
+        <div class="section-header">
+            <span class="section-number">02</span>
+            <span class="section-dash">-</span>
+            <h2>Background</h2>
+        </div>
+        <div class="about-content">
+            <div class="about-main">
+                <p class="about-lead">
+                    Biological data is high-dimensional, structured, and noisy.
+                    My work centers on extracting meaningful structure from it using
+                    statistical reasoning and graph-based computation.
+                </p>
+                <div class="about-interests">
+                    <h3 class="interests-label">Core Interests</h3>
+                    <ul class="interest-list">
+                        <li>
+                            <span class="interest-marker"></span>
+                            <div>
+                                <strong>Spectral analysis</strong> of biological networks
+                                <span class="interest-sub">- Laplacian eigenmaps, Fiedler vectors, community detection</span>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="interest-marker"></span>
+                            <div>
+                                <strong>Dimensionality reduction</strong> with algebraic structure
+                                <span class="interest-sub">- SVD, principal component networks, manifold geometry</span>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="interest-marker"></span>
+                            <div>
+                                <strong>Ontology-driven</strong> feature construction
+                                <span class="interest-sub">- GO annotations → learnable numerical representations</span>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="interest-marker"></span>
+                            <div>
+                                <strong>Efficient computation</strong> for high-dimensional systems
+                                <span class="interest-sub">- GPU acceleration, sparse matrix methods, scalable pipelines</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="about-closing">
+                    <p>Rather than stacking models, I focus on understanding the geometry and algebra behind them.</p>
+                </div>
+            </div>
+
+            <div class="about-side">
+                <div class="cell-canvas-container">
+                    <canvas id="cellCanvas" width="280" height="320"></canvas>
+                    <div class="cell-label">Gene expression signaling · simulated</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="education-block">
+            <h3 class="subsection-title">Education</h3>
+            <div class="edu-timeline">
+                <div class="edu-item">
+                    <div class="edu-marker">
+                        <div class="edu-marker-dot"></div>
+                        <div class="edu-marker-line"></div>
+                    </div>
+                    <div class="edu-year">2023–2025</div>
+                    <div class="edu-info">
+                        <div class="edu-degree">M.Sc. Bioinformatics</div>
+                        <div class="edu-school">University of North Bengal</div>
+                        <div class="edu-note">Computational systems biology, ML-driven analysis of high-dimensional data</div>
+                    </div>
+                </div>
+                <div class="edu-item">
+                    <div class="edu-marker">
+                        <div class="edu-marker-dot"></div>
+                    </div>
+                    <div class="edu-year">2020–2023</div>
+                    <div class="edu-info">
+                        <div class="edu-degree">B.Sc. Zoology (Honours)</div>
+                        <div class="edu-school">Kalimpong College - University of North Bengal</div>
+                        <div class="edu-note">CGPA: 7.64 · Molecular biology, biochemistry and genetics foundation</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- RESEARCH -->
+    <section id="research" class="section">
+        <div class="section-header">
+            <span class="section-number">03</span>
+            <span class="section-dash">—</span>
+            <h2>Research Directions</h2>
+        </div>
+        <div class="research-content">
+            <div class="direction-card">
+                <div class="direction-helix">
+                    <canvas id="helixCanvas" width="80" height="260"></canvas>
+                </div>
+                <div class="direction-body">
+                    <h3>Current Focus</h3>
+                    <p>My research is oriented toward principled
+                    and interpretable computational biology:</p>
+                    <ul>
+                        <li>
+                            <span class="dir-icon">λ</span>
+                            Spectral approaches for biological network inference
+                        </li>
+                        <li>
+                            <span class="dir-icon">∇</span>
+                            Efficient computation in high-dimensional systems
+                        </li>
+                        <li>
+                            <span class="dir-icon">⊕</span>
+                            Structured integration of biological knowledge into learnable representations
+                        </li>
+                    </ul>
+                    <div class="direction-equation">
+                        <canvas id="equationCanvas" width="400" height="60"></canvas>
+                    </div>
+                    <p class="direction-note">
+                        The long-term direction: computation that respects the algebraic
+                        structure of biology while remaining scalable and interpretable.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="section">
+        <div class="section-header">
+            <span class="section-number">04</span>
+            <span class="section-dash">-</span>
+            <h2>Projects</h2>
+        </div>
+        <div class="projects-grid">
+
+            <div class="project-card" data-accent="cyan">
+                <div class="project-top">
+                    <div class="project-icon-bio">
+                        <canvas class="project-mini-viz" data-type="network" width="48" height="48"></canvas>
+                    </div>
+                    <a href="https://github.com/BhuwanShar" target="_blank" class="project-github">
+                        <span>View Source</span>
+                        <span class="gh-arrow">→</span>
+                    </a>
+                </div>
+                <h3>Statistical Foundations</h3>
+                <p class="project-tag">Stats</p>
+                <p class="project-desc">
+                    Foundational statistical analysis and visualization -
+                    understanding data behavior before applying complex models.
+                </p>
+                <div class="project-focus">
+                    <span>Distribution analysis</span>
+                    <span>Regression</span>
+                    <span>Exploratory interpretation</span>
+                    <span>Reproducible workflows</span>
+                </div>
+                <div class="project-bar">
+                    <div class="project-bar-fill" style="width: 85%"></div>
+                </div>
+            </div>
+
+            <div class="project-card" data-accent="magenta">
+                <div class="project-top">
+                    <div class="project-icon-bio">
+                        <canvas class="project-mini-viz" data-type="eigen" width="48" height="48"></canvas>
+                    </div>
+                    <a href="https://github.com/BhuwanShar" target="_blank" class="project-github">
+                        <span>View Source</span>
+                        <span class="gh-arrow">→</span>
+                    </a>
+                </div>
+                <h3>GPU-Accelerated Principal Component Network</h3>
+                <p class="project-tag">PCnet_GPUacc</p>
+                <p class="project-desc">
+                    Accelerating principal component–based network computations using GPU resources.
+                    Mathematical structure meets computational scalability.
+                </p>
+                <div class="project-focus">
+                    <span>Eigen-decomposition</span>
+                    <span>Matrix factorization</span>
+                    <span>Network inference</span>
+                    <span>CUDA optimization</span>
+                </div>
+                <div class="project-bar">
+                    <div class="project-bar-fill" style="width: 70%"></div>
+                </div>
+            </div>
+
+            <div class="project-card" data-accent="amber">
+                <div class="project-top">
+                    <div class="project-icon-bio">
+                        <canvas class="project-mini-viz" data-type="ontology" width="48" height="48"></canvas>
+                    </div>
+                    <a href="https://github.com/BhuwanShar" target="_blank" class="project-github">
+                        <span>View Source</span>
+                        <span class="gh-arrow">→</span>
+                    </a>
+                </div>
+                <h3>Ontology-Based Feature Structuring</h3>
+                <p class="project-tag"></p>
+                <p class="project-desc">
+                    Integrating Gene Ontology annotations into structured computational formats -
+                    bridging biological semantics with numerical modeling.
+                </p>
+                <div class="project-focus">
+                    <span>Gene–ontology mappings</span>
+                    <span>Hierarchical features</span>
+                    <span>High-dim annotation</span>
+                </div>
+                <div class="project-bar">
+                    <div class="project-bar-fill" style="width: 60%"></div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" class="section">
+        <div class="section-header">
+            <span class="section-number">05</span>
+            <span class="section-dash">-</span>
+            <h2>Technical Expertise</h2>
+        </div>
+        <div class="skills-container">
+            <div class="skill-category">
+                <div class="skill-cat-header">
+                    <h4>Programming Languages</h4>
+                    <div class="skill-cat-line"></div>
+                </div>
+                <div class="skill-tags">
+                    <span class="skill-tag lang" data-level="95">Python</span>
+                    <span class="skill-tag lang" data-level="85">R</span>
+                    <span class="skill-tag lang-sec" data-level="60">Bash</span>
+                    <span class="skill-tag lang-sec" data-level="55">C</span>
+                    <span class="skill-tag lang-sec" data-level="50">Java</span>
+                </div>
+            </div>
+            <div class="skill-category">
+                <div class="skill-cat-header">
+                    <h4>Bioinformatics</h4>
+                    <div class="skill-cat-line"></div>
+                </div>
+                <div class="skill-tags">
+                    <span class="skill-tag bio">limma</span>
+                    <span class="skill-tag bio">DESeq2</span>
+                    <span class="skill-tag bio">clusterProfiler</span>
+                    <span class="skill-tag bio">biomaRt</span>
+                </div>
+            </div>
+            <div class="skill-category">
+                <div class="skill-cat-header">
+                    <h4>Machine Learning</h4>
+                    <div class="skill-cat-line"></div>
+                </div>
+                <div class="skill-tags">
+                    <span class="skill-tag ml">PyTorch</span>
+                    <span class="skill-tag ml">scikit-learn</span>
+                    <span class="skill-tag ml">Transformers</span>
+                    <span class="skill-tag ml">PyTorch Geometric</span>
+                </div>
+            </div>
+            <div class="skill-category">
+                <div class="skill-cat-header">
+                    <h4>Systems & Tools</h4>
+                    <div class="skill-cat-line"></div>
+                </div>
+                <div class="skill-tags">
+                    <span class="skill-tag tools">Linux</span>
+                    <span class="skill-tag tools">Git</span>
+                    <span class="skill-tag tools">Conda</span>
+                    <span class="skill-tag tools">CUDA</span>
+                    <span class="skill-tag tools">Jupyter</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- APPROACH -->
+    <section id="approach" class="section">
+        <div class="section-header">
+            <span class="section-number">06</span>
+            <span class="section-dash">-</span>
+            <h2>Approach</h2>
+        </div>
+        <div class="approach-steps">
+            <div class="step" data-step="1">
+                <div class="step-visual">
+                    <canvas class="step-canvas" data-viz="structure" width="64" height="64"></canvas>
+                </div>
+                <div class="step-number">01</div>
+                <div class="step-content">
+                    <h3>Understand the root structure</h3>
+                    <p>Before reaching for algorithms - ask what is the underlying form?? <br>
+                    The answer shapes everything that follows.</p>
+                </div>
+            </div>
+            <div class="step" data-step="2">
+                <div class="step-visual">
+                    <canvas class="step-canvas" data-viz="reduce" width="64" height="64"></canvas>
+                </div>
+                <div class="step-number">02</div>
+                <div class="step-content">
+                    <h3>Reduce to what matters</h3>
+                    <p>High-dimensional biological data carries noise alongside signal.
+                    Spectral methods, dimension reduction, and structured feature
+                    construction isolate what is biologically meaningful.</p>
+                </div>
+            </div>
+            <div class="step" data-step="3">
+                <div class="step-visual">
+                    <canvas class="step-canvas" data-viz="biology" width="64" height="64"></canvas>
+                </div>
+                <div class="step-number">03</div>
+                <div class="step-content">
+                    <h3>Preserve biological meaning</h3>
+                    <p>Mathematical abstraction should serve biology, not replace it.
+                    Every transformation should be interpretable - a principal component
+                    should map back to a gene set, a cluster to a phenotype.</p>
+                </div>
+            </div>
+            <div class="step" data-step="4">
+                <div class="step-visual">
+                    <canvas class="step-canvas" data-viz="impact" width="64" height="64"></canvas>
+                </div>
+                <div class="step-number">04</div>
+                <div class="step-content">
+                    <h3>Build toward impact</h3>
+                    <p>The end goal is not a model - it is insight.
+                    Biomarker discovery, disease understanding, drug target identification.
+                    Computation should ultimately serve human health.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SPECTRAL EMBEDDING (replaces Philosophy/PCA) -->
+    <section id="spectral" class="section">
+        <div class="section-header">
+            <span class="section-number">07</span>
+            <span class="section-dash">—</span>
+            <h2>Spectral Embedding</h2>
+        </div>
+
+        <div class="spectral-intro">
+            <div class="spectral-quote">
+                <p>"A graph Laplacian's eigenvectors encode geometry.</p>
+                <p>Communities emerge from spectrum, not from labels."</p>
+            </div>
+            <p class="spectral-desc">
+                The interactive below demonstrates how spectral methods extract geometric
+                structure from connectivity. The network's Laplacian matrix is decomposed -
+                its eigenvectors become coordinates in embedding space,
+                revealing clusters that topology alone implies.
+            </p>
+        </div>
+
+        <div class="spectral-interactive">
+            <div class="spectral-panel spectral-3d">
+                <div class="panel-header">
+                    <span class="panel-tag">3D Spectral Embedding</span>
+                    <span class="panel-hint">drag to rotate</span>
+                </div>
+                <canvas id="spectralCanvas" width="700" height="500"></canvas>
+            </div>
+            <div class="spectral-panel spectral-network">
+                <div class="panel-header">
+                    <span class="panel-tag">Network Topology</span>
+                    <span class="panel-hint">hover nodes</span>
+                </div>
+                <canvas id="networkGraphCanvas" width="360" height="360"></canvas>
+            </div>
+            <div class="spectral-panel spectral-spectrum">
+                <div class="panel-header">
+                    <span class="panel-tag">Laplacian Spectrum</span>
+                </div>
+                <canvas id="spectrumCanvas" width="360" height="140"></canvas>
+            </div>
+        </div>
+
+        <div class="spectral-legend">
+            <div class="legend-group">
+                <span><span class="legend-dot" style="background:#00f0ff"></span> Community A</span>
+                <span><span class="legend-dot" style="background:#ff4060"></span> Community B</span>
+                <span><span class="legend-dot" style="background:#ffb000"></span> Community C</span>
+                <span><span class="legend-dot" style="background:#a855f7"></span> Bridge nodes</span>
+            </div>
+            <div class="spectral-equation">
+                L = D − A &nbsp;→&nbsp; Lv = λv &nbsp;→&nbsp; embedding: [v₂, v₃, v₄]
+            </div>
+        </div>
+
+        <div class="philosophy-body">
+            <p>
+                Biology is not a benchmark dataset - it is a system where every gene,
+                every interaction, every annotation carries meaning shaped by evolution.
+                The most impactful computational biology comes not from chasing
+                the newest architecture, but from deeply understanding the problem's structure.
+            </p>
+            <p>
+                A well-chosen decomposition reveals more than a thousand gradient steps.
+                I prioritize clarity in formulation, disciplined computation,
+                and structured reasoning - because the goal is not just to predict,
+                but to understand.
+            </p>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section">
+        <div class="section-header">
+            <span class="section-number">08</span>
+            <span class="section-dash">-</span>
+            <h2>Contact</h2>
+        </div>
+        <div class="contact-content">
+            <p class="contact-lead">
+                Interested in collaborative research or have a project in mind?
+            </p>
+            <div class="contact-grid">
+                <a href="mailto:bhuwangautam09@gmail.com" class="contact-card">
+                    <span class="contact-symbol">✉</span>
+                    <span class="contact-label">Email</span>
+                    <span class="contact-value">bhuwangautam09@gmail.com</span>
+                </a>
+                <a href="https://github.com/BhuwanShar" target="_blank" class="contact-card">
+                    <span class="contact-symbol">⟨/⟩</span>
+                    <span class="contact-label">GitHub</span>
+                    <span class="contact-value">BhuwanShar</span>
+                </a>
+                <a href="https://www.linkedin.com/in/bhuwansharma2002" target="_blank" class="contact-card">
+                    <span class="contact-symbol">in</span>
+                    <span class="contact-label">LinkedIn</span>
+                    <span class="contact-value">bhuwansharma2002</span>
                 </a>
             </div>
-        </div>
-    </header>
-
-    <!-- BREADCRUMB -->
-    <nav class="breadcrumb" id="breadcrumb">
-        <div class="breadcrumb-inner">
-            <span class="breadcrumb-current"> Home</span>
-        </div>
-    </nav>
-
-    <!-- MAIN LAYOUT -->
-    <main class="main-container" id="mainContainer">
-        <!-- SIDEBAR -->
-        <aside class="sidebar" id="sidebar">
-            <div class="sidebar-header">
-                <span class="sidebar-title">Knowledge Tree</span>
-                <button class="btn-icon btn-sm" id="collapseAll" title="Collapse all">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
-                        <polyline points="4 14 10 14 10 20"/><polyline points="20 10 14 10 14 4"/><line x1="14" y1="10" x2="21" y2="3"/><line x1="3" y1="21" x2="10" y2="14"/>
-                    </svg>
-                </button>
-                <button class="btn-icon btn-sm" id="expandAll" title="Expand all">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
-                        <polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/>
-                    </svg>
-                </button>
-            </div>
-            <div class="sidebar-tree" id="treeContainer"></div>
-        </aside>
-
-        <!-- RESIZE HANDLE -->
-        <div class="resize-handle" id="resizeHandle"></div>
-
-        <!-- CONTENT -->
-        <section class="content-panel" id="contentPanel">
-            <!-- Dynamic content rendered here -->
-        </section>
-    </main>
-
-    <!-- SCROLL TO TOP -->
-    <button class="scroll-top" id="scrollTop" title="Scroll to top">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
-            <polyline points="18 15 12 9 6 15"/>
-        </svg>
-    </button>
-
-    <!-- FOOTER -->
-    <footer class="footer">
-        <div class="footer-inner">
-            <div class="footer-brand">
-                <span class="footer-logo"></span>
-                <div>
-                    <p class="footer-title">Bioinformatics Knowledge Archive</p>
-                    <p class="footer-copy">&copy; 2026 Bhuwan Sharma. All rights reserved.</p>
-                </div>
-            </div>
-            <div class="footer-links">
-                <a href="https://github.com/BhuwanShar/" target="_blank" rel="noopener noreferrer">
-                    <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-                    GitHub
-                </a>
-                <a href="https://www.linkedin.com/in/bhuwansharma2002" target="_blank" rel="noopener noreferrer">
-                    <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-                    LinkedIn
-                </a>
-            </div>
-            <div class="footer-stats">
-                <span id="totalTopics">0</span> Topics &bull;
-                <span id="totalTools">0</span> Tools &bull;
-                <span id="totalWorkflows">0</span> Workflows
+            <div class="contact-areas">
+                <h3>Open for collaboration in:</h3>
+                <ul>
+                    <li>Spectral methods in systems biology</li>
+                    <li>Network-based inference and prediction</li>
+                    <li>Multi-omics data integration</li>
+                    <li>Machine and Deep Learning for biology</li>
+                </ul>
             </div>
         </div>
-    </footer>
+    </section>
 
-    <!-- SEARCH MODAL -->
-    <div class="modal-overlay" id="searchModal">
-        <div class="search-modal">
-            <div class="search-modal-header">
-                <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
-                    <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
-                </svg>
-                <input type="text" id="modalSearchInput" placeholder="Type to search across all topics..." autocomplete="off" spellcheck="false">
-                <kbd>ESC</kbd>
-            </div>
-            <div class="search-modal-results" id="modalSearchResults">
-                <div class="search-empty">
-                    <p>Start typing to search across all bioinformatics topics, tools, and workflows.</p>
-                </div>
-            </div>
-        </div>
+</main>
+
+<!-- FOOTER -->
+<footer id="siteFooter">
+    <div class="footer-inner">
+        <span class="footer-left">© 2025 Bhuwan Sharma</span>
+        <span class="footer-center">Siliguri, West Bengal, India</span>
+        <span class="footer-right">Crafted with structure in mind</span>
     </div>
+</footer>
 
-    <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
