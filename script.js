@@ -1,6 +1,6 @@
 /* ══════════════════════════════════════════════════
    BHUWAN SHARMA — PORTFOLIO SCRIPT
-   Computational Biology · Premium Interactions
+   Computational Biology 
    ══════════════════════════════════════════════════ */
 
 (function () {
