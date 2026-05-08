@@ -1,615 +1,1218 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Bhuwan Sharma | Computational Biology</title>
+    <meta name="description" content="Bhuwan Sharma — Computational Systems Biology researcher specializing in graph neural networks, biomarker discovery, and AI-driven biological network analysis."/>
+    <meta name="keywords" content="computational biology, bioinformatics, graph neural networks, biomarker discovery, systems biology, AI, deep learning"/>
+    <meta name="author" content="Bhuwan Sharma"/>
+    <meta property="og:title" content="Bhuwan Sharma — Computational & Systems Biology"/>
+    <meta property="og:description" content="AI-Driven Biomarker Discovery · Graph Learning for Biological Networks · Bioinformatics × Deep Learning"/>
+    <meta property="og:type" content="website"/>
+    <meta name="twitter:card" content="summary_large_image"/>
+    <title>Bhuwan Sharma — Computational & Systems Biology</title>
+    <!-- ── FAVICON ───────────────────────────── -->
+    <link
+        rel="icon"
+        href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><defs><linearGradient id="g" x1="0%25" y1="0%25" x2="100%25" y2="100%25"><stop offset="0%25" stop-color="%2300e5ff"/><stop offset="100%25" stop-color="%237c3aed"/></linearGradient></defs><polygon points="32,6 52,18 52,46 32,58 12,46 12,18" fill="none" stroke="url(%23g)" stroke-width="4"/></svg>'
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css"/>
-    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<!-- LOADING SCREEN -->
-<div id="loader">
-    <div class="loader-content">
-        <div class="loader-cell" id="loaderCell">
-            <canvas id="loaderCanvas" width="200" height="200"></canvas>
-        </div>
-        <div class="loader-equation">
-            <span class="loader-matrix" id="loaderL">A</span>
-            <span class="loader-op">=</span>
-            <span class="loader-matrix" id="loaderD">U</span>
-            <span class="loader-op" id ="loaderB">Σ</span>
-            <span class="loader-matrix" id="loaderA">Vᵀ</span>
-        </div>
-        <div class="loader-bar-container">
-            <div class="loader-bar" id="loaderBar"></div>
-        </div>
-        <div class="loader-status" id="loaderStatus">
-            <span class="loader-phase" id="loaderPhase">initializing membrane potential</span>
-            <span class="loader-dots">...</span>
-        </div>
-    </div>
-</div>
-
-<!-- BACKGROUND CANVAS -->
+<!-- PARTICLE CANVAS -->
 <canvas id="networkCanvas"></canvas>
 
-<!-- CHROMOSOME SCROLL INDICATOR -->
-<div class="chromo-scroll" id="chromoScroll">
-    <canvas id="chromoCanvas" width="32" height="600"></canvas>
-    <div class="chromo-marker" id="chromoMarker"></div>
-</div>
+<!-- CURSOR GLOW -->
+<div class="cursor-glow" id="cursorGlow"></div>
 
-<!-- NAVIGATION -->
-<nav id="specNav" class="spec-nav">
-    <div class="nav-label">NAVIGATE</div>
-    <a href="#hero" class="nav-item active" data-section="hero">
-        <span class="nav-dot"></span>
-        <span class="nav-text">Home</span>
-    </a>
-    <a href="#about" class="nav-item" data-section="about">
-        <span class="nav-dot"></span>
-        <span class="nav-text">Background</span>
-    </a>
-    <a href="#research" class="nav-item" data-section="research">
-        <span class="nav-dot"></span>
-        <span class="nav-text">Research</span>
-    </a>
-    <a href="#projects" class="nav-item" data-section="projects">
-        <span class="nav-dot"></span>
-        <span class="nav-text">Projects</span>
-    </a>
-    <a href="#skills" class="nav-item" data-section="skills">
-        <span class="nav-dot"></span>
-        <span class="nav-text">Skills</span>
-    </a>
-    <a href="#approach" class="nav-item" data-section="approach">
-        <span class="nav-dot"></span>
-        <span class="nav-text">Approach</span>
-    </a>
-    <a href="#spectral" class="nav-item" data-section="spectral">
-        <span class="nav-dot"></span>
-        <span class="nav-text">Spectral</span>
-    </a>
-    <a href="#contact" class="nav-item" data-section="contact">
-        <span class="nav-dot"></span>
-        <span class="nav-text">Contact</span>
-    </a>
+<!-- NAV -->
+<nav class="nav" id="mainNav">
+    <div class="nav-inner">
+        <a href="#hero" class="nav-brand">
+            <span class="brand-icon">⬡</span>
+            <span class="brand-text">Bhuwan Sharma</span>
+        </a>
+        <div class="nav-links" id="navLinks">
+            <a href="#about" data-section="about">About</a>
+            <a href="#research" data-section="research">Research</a>
+            <a href="#projects" data-section="projects">Projects</a>
+            <a href="#pipeline" data-section="pipeline">Pipeline</a>
+            <a href="#techstack" data-section="techstack">Stack</a>
+            <a href="#publications" data-section="publications">Publications</a>
+            <a href="#blog" data-section="blog">Notes</a>
+            <a href="#contact" data-section="contact">Contact</a>
+        </div>
+        <div class="nav-actions">
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                <span class="toggle-track">
+                    <span class="toggle-sun">☀</span>
+                    <span class="toggle-moon">☾</span>
+                    <span class="toggle-thumb" id="toggleThumb"></span>
+                </span>
+            </button>
+            <a href="#contact" class="nav-cta">Get in Touch</a>
+            <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </div>
 </nav>
 
-<!-- MOBILE NAV TOGGLE -->
-<button id="navToggle" class="nav-toggle" aria-label="Toggle navigation">
-    <span></span><span></span><span></span>
-</button>
-
-<!-- MAIN CONTENT -->
-<main id="mainContent">
-
-    <!-- HERO -->
-    <section id="hero" class="section hero-section">
-        <div class="hero-grid">
-            <div class="hero-text">
-                <div class="hero-overline">
-                    <span class="overline-helix">
-                        <canvas id="overlineHelix" width="24" height="24"></canvas>
-                    </span>
-                    <span>Computational & Systems Biology</span>
-                </div>
-                <h1 class="hero-name" id="heroName">
-                    <span class="name-line">Bhuwan</span>
-                    <span class="name-line">Sharma</span>
-                </h1>
-                <p class="hero-subtitle">
-                    Spectral Methods · Network Computation · Systems Biology
-                </p>
-                <p class="hero-description">
-                    I work on grounded approaches for modeling biological systems -
-                    extracting structure from high-dimensional data through decomposition,
-                    graph theory, and principled computation.
-                </p>
-
-                <div class="hero-profile">
-                    <div class="hero-avatar">
-                        <div class="avatar-ring">
-                            <canvas id="avatarRingCanvas" width="96" height="96"></canvas>
-                        </div>
-                        <img src="https://avatars.githubusercontent.com/BhuwanShar" alt="Bhuwan Sharma" id="heroAvatar"/>
-                    </div>
-                    <div class="hero-links">
-                        <a href="mailto:bhuwangautam09@gmail.com" class="hero-link">
-                            <span class="link-icon">✉</span>
-                            <span>bhuwangautam09@gmail.com</span>
-                        </a>
-                        <a href="https://github.com/BhuwanShar" target="_blank" class="hero-link">
-                            <span class="link-icon">⟨/⟩</span>
-                            <span>GitHub</span>
-                        </a>
-                        <a href="https://www.linkedin.com/in/bhuwansharma2002" target="_blank" class="hero-link">
-                            <span class="link-icon">in</span>
-                            <span>LinkedIn</span>
-                        </a>
-                    </div>
-                </div>
+<!-- HERO -->
+<section class="hero" id="hero">
+    <div class="hero-bg-effects">
+        <div class="hero-gradient-orb orb-1"></div>
+        <div class="hero-gradient-orb orb-2"></div>
+        <div class="hero-gradient-orb orb-3"></div>
+        <div class="hero-grid-overlay"></div>
+    </div>
+    <div class="hero-inner">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span class="badge-dot"></span>
+                <span class="badge-text">Open to Research Collaborations</span>
             </div>
-            <div class="hero-viz">
-                <canvas id="eigenCanvas" width="560" height="520"></canvas>
-                <div class="viz-caption">
-                    <span class="viz-live-dot"></span>
-                    Gene regulatory network · Live eigendecomposition
+            <h1 class="hero-title">
+                <span class="title-line title-line-1">Computational &</span>
+                <span class="title-line title-line-2">Systems <span class="title-accent">Biology</span></span>
+            </h1>
+            <p class="hero-subtitle">
+                AI-Driven Biomarker Discovery · Graph Learning for Biological Networks · Bioinformatics · Deep Learning
+            </p>
+            <p class="hero-desc">
+                Building graph-based computational methods that integrate structured biological
+                priors with learned representations — for interpretable biomarker discovery,
+                disease network inference, and multi-omics data integration.
+            </p>
+            <div class="hero-actions">
+                <a href="#projects" class="btn btn-primary">
+                    <span>View </span>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7.8H7.8"/></svg>
+                </a>
+                <a href="#" class="btn btn-secondary" id="downloadCV">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+                    <span>Download CV</span>
+                </a>
+                <a href="https://github.com/BhuwanShar" target="_blank" rel="noopener" class="btn btn-ghost">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                    <span>GitHub</span>
+                </a>
+            </div>
+            <!-- <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-number" data-count="5">0</span><span class="stat-plus">+</span>
+                    <span class="stat-label">Projects</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-count="">0</span><span class="stat-plus">+</span>
+                    <span class="stat-label">Technologies</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-count="3">0</span><span class="stat-plus">+</span>
+                    <span class="stat-label">Focus Areas</span>
+                </div>
+            </div> -->
+        </div>
+        <div class="hero-visual">
+            <div class="hero-photo-container">
+                <div class="photo-ring ring-1"></div>
+                <div class="photo-ring ring-2"></div>
+                <div class="photo-ring ring-3"></div>
+                <img src="https://avatars.githubusercontent.com/BhuwanShar"
+                     alt="Bhuwan Sharma"
+                     class="hero-photo"
+                     id="heroPhoto"
+                     loading="eager"/>
+                <div class="photo-fallback" id="photoFallback">BS</div>
+            </div>
+            <div class="hero-float-cards">
+                <div class="float-card fc-1">
+                    <div class="fc-dot"></div>
+                    <span class="fc-text">GNN</span>
+                </div>
+                <div class="float-card fc-2">
+                    <div class="fc-dot"></div>
+                    <span class="fc-text">GRN</span>
+                </div>
+                <div class="float-card fc-3">
+                    <div class="fc-dot"></div>
+                    <span class="fc-text">Biomarker Discovery</span>
+                </div>
+                <div class="float-card fc-4">
+                    <div class="fc-dot"></div>
+                    <span class="fc-text">Multi-omics</span>
+                </div>
+                <div class="float-card fc-5">
+                    <div class="fc-dot"></div>
+                    <span class="fc-text">PPI</span>
                 </div>
             </div>
         </div>
+    </div>
+    <div class="scroll-indicator" id="scrollIndicator">
+        <span class="scroll-text">Scroll to explore</span>
+        <div class="scroll-line"><div class="scroll-dot"></div></div>
+    </div>
+</section>
 
-        <!-- Floating gene bits -->
-        <div class="gene-stream" id="geneStream"></div>
-    </section>
-
-    <!-- ABOUT -->
-    <section id="about" class="section">
-        <div class="section-header">
-            <span class="section-number">02</span>
-            <span class="section-dash">-</span>
-            <h2>Background</h2>
-        </div>
-        <div class="about-content">
-            <div class="about-main">
+<!-- ABOUT -->
+<section class="section" id="about">
+    <div class="section-header">
+        <h2 class="section-title">About</h2>
+        <div class="section-line"></div>
+    </div>
+    <div class="section-content">
+        <div class="about-grid">
+            <div class="about-text">
                 <p class="about-lead">
-                    Biological data is high-dimensional, structured, and noisy.
-                    My work centers on extracting meaningful structure from it using
-                    statistical reasoning and graph-based computation.
+                    I'm a computational biologist working at the intersection of graph representation learning, 
+                    systems biology, and multi-omics integration. My work is driven by a simple conviction: 
+                    biological systems are not collections of independent parts — they are deeply interconnected 
+                    networks, and the methods we use to study them should reflect that.
                 </p>
-                <div class="about-interests">
-                    <h3 class="interests-label">Core Interests</h3>
-                    <ul class="interest-list">
-                        <li>
-                            <span class="interest-marker"></span>
-                            <div>
-                                <strong>Spectral analysis</strong> of biological networks
-                                <span class="interest-sub">- Laplacian eigenmaps, Fiedler vectors, community detection</span>
+                <p>
+                    Most of what I build revolves around encoding biological structure directly into machine 
+                    learning architectures — embedding interaction topology, functional ontologies, and 
+                    sequence-derived representations into models that preserve mechanistic context rather than 
+                    treating genes as isolated variables. This means working across graph neural networks, 
+                    spectral methods, and deep sequence models simultaneously, stitching them into pipelines 
+                    that can turn high-dimensional molecular data into interpretable biological hypotheses.
+                </p>
+                <p>
+                    I'm particularly interested in the hard problems: how to make ontological knowledge 
+                    differentiable, how to combine heterogeneous network types without amplifying noise, 
+                    and how to evaluate predictions when ground truth itself is incomplete and biased. 
+                    These are questions I think about constantly, and they shape every methodological choice 
+                    I make.
+                </p>
+                <div class="about-tags">
+                    <span class="tag">Computational Biology</span>
+                    <span class="tag">Graph Neural Networks</span>
+                    <span class="tag">Biomarker Discovery</span>
+                    <span class="tag">Systems Biology</span>
+                    <span class="tag">Multi-omics</span>
+                    <span class="tag">Explainable AI</span>
+                </div>
+            </div>
+            <div class="about-sidebar">
+                <div class="education-card glass-card">
+                    <h3 class="card-title">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 1.1 2.7 3 6 3s6-1.9 6-3v-5"/></svg>
+                        Education
+                    </h3>
+                    <div class="edu-timeline">
+                        <div class="edu-entry">
+                            <div class="edu-dot"></div>
+                            <div class="edu-info">
+                                <span class="edu-period">2023 — 2025</span>
+                                <span class="edu-title">M.Sc. Bioinformatics</span>
+                                <span class="edu-place">University of North Bengal</span>
+                                <span class="edu-desc">Computational systems biology · ML for biological data · Graph-based inference</span>
                             </div>
+                        </div>
+                        <div class="edu-entry">
+                            <div class="edu-dot"></div>
+                            <div class="edu-info">
+                                <span class="edu-period">2020 — 2023</span>
+                                <span class="edu-title">B.Sc. Zoology (Hons.)</span>
+                                <span class="edu-place">Kalimpong College, UNB</span>
+                                <span class="edu-desc">CGPA 7.64 · Molecular biology · Genetics · Biochemistry</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="interests-card glass-card">
+                    <h3 class="card-title">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+                        Research Interests
+                    </h3>
+                    <ul class="interest-items">
+                        <li>
+                            <span class="interest-arrow">→</span>
+                            Graph neural networks for biological network analysis
                         </li>
                         <li>
-                            <span class="interest-marker"></span>
-                            <div>
-                                <strong>Dimensionality reduction</strong> with algebraic structure
-                                <span class="interest-sub">- SVD, principal component networks, manifold geometry</span>
-                            </div>
+                            <span class="interest-arrow">→</span>
+                            Spectral methods &amp; Laplacian-based network inference
                         </li>
                         <li>
-                            <span class="interest-marker"></span>
-                            <div>
-                                <strong>Ontology-driven</strong> feature construction
-                                <span class="interest-sub">- GO annotations → learnable numerical representations</span>
-                            </div>
+                            <span class="interest-arrow">→</span>
+                            Multi-omics data integration &amp; biomarker discovery
                         </li>
                         <li>
-                            <span class="interest-marker"></span>
-                            <div>
-                                <strong>Efficient computation</strong> for high-dimensional systems
-                                <span class="interest-sub">- GPU acceleration, sparse matrix methods, scalable pipelines</span>
-                            </div>
+                            <span class="interest-arrow">→</span>
+                            Ontology-driven feature construction
+                        </li>
+                        <li>
+                            <span class="interest-arrow">→</span>
+                            Oversmoothing in deep GNNs on biological graphs
+                        </li>
+                        <li>
+                            <span class="interest-arrow">→</span>
+                            Causal inference in observational multi-omics data
                         </li>
                     </ul>
                 </div>
-                <div class="about-closing">
-                    <p>Rather than stacking models, I focus on understanding the geometry and algebra behind them.</p>
-                </div>
-            </div>
-
-            <div class="about-side">
-                <div class="cell-canvas-container">
-                    <canvas id="cellCanvas" width="280" height="320"></canvas>
-                    <div class="cell-label">Gene expression signaling · simulated</div>
-                </div>
             </div>
         </div>
+    </div>
+</section>
 
-        <div class="education-block">
-            <h3 class="subsection-title">Education</h3>
-            <div class="edu-timeline">
-                <div class="edu-item">
-                    <div class="edu-marker">
-                        <div class="edu-marker-dot"></div>
-                        <div class="edu-marker-line"></div>
+<!-- RESEARCH -->
+<section class="section" id="research">
+    <div class="section-header">
+        <h2 class="section-title">Research</h2>
+        <div class="section-line"></div>
+    </div>
+    <div class="section-content">
+        <p class="section-lead">
+            My research sits at the intersection of spectral graph theory,
+            deep learning on biological networks, and multi-omics integration.
+        </p>
+        <div class="research-cards">
+            <article class="research-card glass-card">
+                <div class="rc-header">
+                    <div class="rc-icon-wrap">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><circle cx="5" cy="6" r="2"/><circle cx="19" cy="6" r="2"/><circle cx="5" cy="18" r="2"/><circle cx="19" cy="18" r="2"/><path d="M7 7l3 3M14 9l3-2M7 17l3-3M14 15l3 2"/></svg>
                     </div>
-                    <div class="edu-year">2023–2025</div>
-                    <div class="edu-info">
-                        <div class="edu-degree">M.Sc. Bioinformatics</div>
-                        <div class="edu-school">University of North Bengal</div>
-                        <div class="edu-note">Computational systems biology, ML-driven analysis of high-dimensional data</div>
-                    </div>
+                    <h3>Graph-Based Biomarker Discovery</h3>
                 </div>
-                <div class="edu-item">
-                    <div class="edu-marker">
-                        <div class="edu-marker-dot"></div>
-                    </div>
-                    <div class="edu-year">2020–2023</div>
-                    <div class="edu-info">
-                        <div class="edu-degree">B.Sc. Zoology (Honours)</div>
-                        <div class="edu-school">Kalimpong College - University of North Bengal</div>
-                        <div class="edu-note">CGPA: 7.64 · Molecular biology, biochemistry and genetics foundation</div>
-                    </div>
+                <p>
+                    Disease mechanisms rarely arise from single-gene perturbations — they emerge from 
+                    coordinated disruptions across interacting molecular networks. I model disease-associated 
+                    molecular data as graphs where nodes carry multi-omics features and edges encode known 
+                    biological interactions: protein-protein, regulatory, and co-expression.
+                </p>
+                <p>
+                    A GCN architecture learns node-level representations that integrate expression features, 
+                    ontology embeddings, and sequence-level information. Attention weights surface which 
+                    interactions are driving predictions, turning a classification output into a biological 
+                    hypothesis worth testing.
+                </p>
+                <div class="rc-tags">
+                    <span>GCN</span><span>PPI Networks</span><span>Attention</span><span>Multi-omics</span>
                 </div>
-            </div>
-        </div>
-    </section>
+            </article>
 
-    <!-- RESEARCH -->
-    <section id="research" class="section">
-        <div class="section-header">
-            <span class="section-number">03</span>
-            <span class="section-dash">—</span>
-            <h2>Research Directions</h2>
-        </div>
-        <div class="research-content">
-            <div class="direction-card">
-                <div class="direction-helix">
-                    <canvas id="helixCanvas" width="80" height="260"></canvas>
-                </div>
-                <div class="direction-body">
-                    <h3>Current Focus</h3>
-                    <p>My research is oriented toward principled
-                    and interpretable computational biology:</p>
-                    <ul>
-                        <li>
-                            <span class="dir-icon">λ</span>
-                            Spectral approaches for biological network inference
-                        </li>
-                        <li>
-                            <span class="dir-icon">∇</span>
-                            Efficient computation in high-dimensional systems
-                        </li>
-                        <li>
-                            <span class="dir-icon">⊕</span>
-                            Structured integration of biological knowledge into learnable representations
-                        </li>
-                    </ul>
-                    <div class="direction-equation">
-                        <canvas id="equationCanvas" width="400" height="60"></canvas>
+            <article class="research-card glass-card">
+                <div class="rc-header">
+                    <div class="rc-icon-wrap">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 3v18h18"/><path d="M7 16l4-8 4 4 5-9"/></svg>
                     </div>
-                    <p class="direction-note">
-                        The long-term direction: computation that respects the algebraic
-                        structure of biology while remaining scalable and interpretable.
-                    </p>
+                    <h3>Spectral Network Inference</h3>
                 </div>
-            </div>
-        </div>
-    </section>
+                <p>
+                    Standard correlation-based gene network construction conflates direct regulatory 
+                    relationships with indirect, transitive associations — producing dense, noisy graphs 
+                    that are hard to interpret and harder to scale. PCA-regularized approaches project 
+                    the correlation structure onto lower-dimensional subspaces, discarding technical noise 
+                    and recovering sparser, more biologically coherent networks.
+                </p>
+                <div class="rc-tags">
+                    <span>SVD</span><span>PCnet</span><span>Spectral Methods</span><span>GPU</span>
+                </div>
+            </article>
 
-    <!-- PROJECTS -->
-    <section id="projects" class="section">
-        <div class="section-header">
-            <span class="section-number">04</span>
-            <span class="section-dash">-</span>
-            <h2>Projects</h2>
+            <article class="research-card glass-card">
+                <div class="rc-header">
+                    <div class="rc-icon-wrap">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+                    </div>
+                    <h3>Ontology-Structured Representations</h3>
+                </div>
+                <p>
+                    Gene Ontology annotations encode decades of curated biological knowledge — but as 
+                    discrete hierarchical labels, they resist direct integration into gradient-based 
+                    learning. Converting them into dense, semantically coherent vector representations 
+                    requires IC-weighted ancestor propagation through the GO DAG, followed by 
+                    dimensionality reduction that respects the original semantic hierarchy.
+                </p>
+                <div class="rc-tags">
+                    <span>Gene Ontology</span><span>Embeddings</span><span>DAG</span><span>IC-weighting</span>
+                </div>
+            </article>
         </div>
+
+        <div class="open-questions glass-card">
+            <h3>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><circle cx="12" cy="17" r=".5"/></svg>
+                Open Questions I'm Thinking About
+            </h3>
+            <ol class="question-list">
+                <li>How to encode hierarchical ontologies as differentiable graph structures for end-to-end learning</li>
+                <li>Principled combination of multiple biological network types with different noise profiles</li>
+                <li>Where oversmoothing in deep GNNs destroys discriminative signal on biological graphs</li>
+                <li>Moving beyond correlation toward causal inference in observational multi-omics data</li>
+                <li>Evaluation when ground truth labels are incomplete and biased toward well-studied genes</li>
+            </ol>
+        </div>
+    </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="section" id="projects">
+    <div class="section-header">
+        <h2 class="section-title">Projects</h2>
+        <div class="section-line"></div>
+    </div>
+    <div class="section-content">
+        <div class="project-filters">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="gnn">GNN</button>
+            <button class="filter-btn" data-filter="spectral">Spectral</button>
+            <button class="filter-btn" data-filter="ontology">Ontology</button>
+            <button class="filter-btn" data-filter="statistics">Statistics</button>
+        </div>
+
         <div class="projects-grid">
 
-            <div class="project-card" data-accent="cyan">
-                <div class="project-top">
-                    <div class="project-icon-bio">
-                        <canvas class="project-mini-viz" data-type="network" width="48" height="48"></canvas>
+            <article class="project-card glass-card" data-tags="gnn" id="project-biomarker">
+                <div class="pc-status">
+                    <span class="status-indicator active"></span>
+                    <span>In Progress</span>
+                </div>
+                <div class="pc-content">
+                    <h3>Graph-Based Biomarker Discovery in Disease Networks</h3>
+                    <p class="pc-desc">
+                        Disease-associated molecular data modeled as a graph with multi-omics
+                        node features and a GCN architecture for biomarker prediction with
+                        attention-based interpretability. Nodes are genes; edges encode known
+                        PPI and co-expression relationships.
+                    </p>
+                    <div class="pc-tech">
+                        <span>PyTorch Geometric</span>
+                        <span>GCN</span>
+                        <span>GAT</span>
+                        <span>STRING PPI</span>
+                        <span>TCGA</span>
                     </div>
-                    <a href="https://github.com/BhuwanShar" target="_blank" class="project-github">
-                        <span>View Source</span>
-                        <span class="gh-arrow">→</span>
-                    </a>
-                </div>
-                <h3>Statistical Foundations</h3>
-                <p class="project-tag">Stats</p>
-                <p class="project-desc">
-                    Foundational statistical analysis and visualization -
-                    understanding data behavior before applying complex models.
-                </p>
-                <div class="project-focus">
-                    <span>Distribution analysis</span>
-                    <span>Regression</span>
-                    <span>Exploratory interpretation</span>
-                    <span>Reproducible workflows</span>
-                </div>
-                <div class="project-bar">
-                    <div class="project-bar-fill" style="width: 85%"></div>
-                </div>
-            </div>
-
-            <div class="project-card" data-accent="magenta">
-                <div class="project-top">
-                    <div class="project-icon-bio">
-                        <canvas class="project-mini-viz" data-type="eigen" width="48" height="48"></canvas>
+                    <div class="pc-details" id="details-biomarker">
+                        <div class="detail-grid">
+                            <div class="detail-block">
+                                <h4>Approach</h4>
+                                <p>Nodes are genes with multi-omics features (expression z-scores,
+                                GO embeddings at 128d, DNABERT promoter embeddings projected to 128d).
+                                Edges come from STRING PPI (confidence ≥ 700) combined with PCnet-inferred
+                                co-expression links. A 3-layer GCN with residual connections and
+                                GAT-style attention ranks edges by biological importance.</p>
+                            </div>
+                            <div class="detail-block">
+                                <h4>Current Status</h4>
+                                <p>Data integration pipeline complete. Baseline GCN trained with
+                                measurable improvement over non-graph baselines. Currently working on
+                                attention-based interpretation to surface biologically meaningful subnetworks.</p>
+                            </div>
+                            <div class="detail-block limitation">
+                                <h4>Open Questions</h4>
+                                <p>Handling missing modalities gracefully; evaluation bias toward well-studied
+                                disease genes; attention scalability on graphs with more than 100K edges.</p>
+                            </div>
+                        </div>
                     </div>
-                    <a href="https://github.com/BhuwanShar" target="_blank" class="project-github">
-                        <span>View Source</span>
-                        <span class="gh-arrow">→</span>
-                    </a>
                 </div>
-                <h3>GPU-Accelerated Principal Component Network</h3>
-                <p class="project-tag">PCnet_GPUacc</p>
-                <p class="project-desc">
-                    Accelerating principal component–based network computations using GPU resources.
-                    Mathematical structure meets computational scalability.
-                </p>
-                <div class="project-focus">
-                    <span>Eigen-decomposition</span>
-                    <span>Matrix factorization</span>
-                    <span>Network inference</span>
-                    <span>CUDA optimization</span>
+                <div class="pc-actions">
+                    <button class="expand-btn" data-target="details-biomarker">
+                        <span>Details</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                    </button>
                 </div>
-                <div class="project-bar">
-                    <div class="project-bar-fill" style="width: 70%"></div>
-                </div>
-            </div>
+            </article>
 
-            <div class="project-card" data-accent="amber">
-                <div class="project-top">
-                    <div class="project-icon-bio">
-                        <canvas class="project-mini-viz" data-type="ontology" width="48" height="48"></canvas>
+            <article class="project-card glass-card" data-tags="spectral">
+                <div class="pc-content">
+                    <h3>GPU-Accelerated Principal Component Network</h3>
+                    <p class="pc-desc">
+                        Full-transcriptome gene co-expression network inference using
+                        GPU-accelerated SVD — achieving roughly 18× speedup over CPU with
+                        biologically interpretable, sparse output networks suitable for
+                        downstream GNN input.
+                    </p>
+                    <div class="pc-tech">
+                        <span>CUDA</span>
+                        <span>cuSOLVER</span>
+                        <span>SVD</span>
+                        <span>PCnet</span>
+                        <span>Python</span>
                     </div>
-                    <a href="https://github.com/BhuwanShar" target="_blank" class="project-github">
-                        <span>View Source</span>
-                        <span class="gh-arrow">→</span>
+                    <div class="pc-details" id="details-pcnet">
+                        <div class="detail-grid">
+                            <div class="detail-block">
+                                <h4>Problem</h4>
+                                <p>Gene co-expression network inference scales as O(n²) in edges
+                                and O(n³) in SVD computation, making full-transcriptome analysis
+                                (≥20K genes) impractical on CPU hardware.</p>
+                            </div>
+                            <div class="detail-block">
+                                <h4>Approach</h4>
+                                <p>GPU-accelerated SVD via cuSOLVER, retaining top-k components
+                                explaining over 95% of variance. Reconstructing the reduced
+                                correlation matrix suppresses noise; mutual rank thresholding
+                                produces sparse, biologically interpretable networks.</p>
+                            </div>
+                            <div class="detail-block">
+                                <h4>Results</h4>
+                                <p>~18× speedup over CPU SVD at 15K × 500 dimensions. Full human
+                                transcriptome network inference in under 4 minutes on RTX 3090.
+                                Recovered known pathway structure (KEGG) with higher precision than
+                                standard Pearson correlation networks.</p>
+                            </div>
+                            <div class="detail-block limitation">
+                                <h4>Limitations</h4>
+                                <p>GPU memory caps effective matrix size (~25K genes). The linear PCA
+                                assumption misses nonlinear regulatory relationships.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pc-actions">
+                    <a href="https://github.com/BhuwanShar" target="_blank" rel="noopener" class="action-link">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                        Source
                     </a>
+                    <button class="expand-btn" data-target="details-pcnet">
+                        <span>Details</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                    </button>
                 </div>
-                <h3>Ontology-Based Feature Structuring</h3>
-                <p class="project-tag"></p>
-                <p class="project-desc">
-                    Integrating Gene Ontology annotations into structured computational formats -
-                    bridging biological semantics with numerical modeling.
-                </p>
-                <div class="project-focus">
-                    <span>Gene–ontology mappings</span>
-                    <span>Hierarchical features</span>
-                    <span>High-dim annotation</span>
+            </article>
+
+            <article class="project-card glass-card" data-tags="ontology">
+                <div class="pc-content">
+                    <h3>Ontology-Structured Feature Engineering</h3>
+                    <p class="pc-desc">
+                        Converting Gene Ontology annotations into dense learnable embeddings
+                        using IC-weighted ancestor propagation — yielding 8–12% AUROC improvement
+                        over expression-only baselines in gene function prediction tasks.
+                    </p>
+                    <div class="pc-tech">
+                        <span>Gene Ontology</span>
+                        <span>SVD</span>
+                        <span>IC-weighting</span>
+                        <span>Python</span>
+                    </div>
+                    <div class="pc-details" id="details-ontology">
+                        <div class="detail-grid">
+                            <div class="detail-block">
+                                <h4>Problem</h4>
+                                <p>GO annotations (~45K terms) exist as discrete hierarchical labels.
+                                Naive one-hot encoding ignores parent-child relationships and produces
+                                extremely sparse vectors unsuitable for gradient-based learning.</p>
+                            </div>
+                            <div class="detail-block">
+                                <h4>Approach</h4>
+                                <p>Ancestor propagation up the GO DAG captures implicit parent terms.
+                                IC-weighted encoding downweights uninformative high-level terms.
+                                SVD then produces dense 128-dimensional GO embeddings per gene that
+                                preserve semantic relationships.</p>
+                            </div>
+                            <div class="detail-block">
+                                <h4>Results</h4>
+                                <p>8–12% AUROC improvement over expression-only baselines. UMAP
+                                projection shows meaningful clustering by biological process.
+                                Nearest-neighbor analysis recovers known functional modules with
+                                higher recall than GO term overlap approaches.</p>
+                            </div>
+                            <div class="detail-block limitation">
+                                <h4>Limitations</h4>
+                                <p>Annotation quality varies significantly by organism. The SVD approach 
+                                assumes linear structure — GNN-based methods may better capture full DAG topology.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="project-bar">
-                    <div class="project-bar-fill" style="width: 60%"></div>
+                <div class="pc-actions">
+                    <a href="https://github.com/BhuwanShar" target="_blank" rel="noopener" class="action-link">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                        Source
+                    </a>
+                    <button class="expand-btn" data-target="details-ontology">
+                        <span>Details</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                    </button>
                 </div>
-            </div>
+            </article>
+
+            <article class="project-card glass-card" data-tags="statistics">
+                <div class="pc-content">
+                    <h3>Statistical Foundations for Biological Data</h3>
+                    <p class="pc-desc">
+                        Reproducible R pipelines for preprocessing biological datasets:
+                        distributional analysis, batch correction, variance-stabilizing
+                        transformations, and multiple testing frameworks that serve as the
+                        foundation for all downstream analysis.
+                    </p>
+                    <div class="pc-tech">
+                        <span>R</span>
+                        <span>DESeq2</span>
+                        <span>ComBat</span>
+                        <span>limma</span>
+                    </div>
+                    <div class="pc-details" id="details-stats">
+                        <div class="detail-grid">
+                            <div class="detail-block">
+                                <h4>Problem &amp; Approach</h4>
+                                <p>Biological datasets exhibit zero-inflated count distributions,
+                                complex batch structures, and extreme dimensionality. Built reproducible
+                                pipelines covering distributional analysis, VST/rlog transformations,
+                                PCA-based batch detection and correction, and multiple testing frameworks.</p>
+                            </div>
+                            <div class="detail-block">
+                                <h4>Results</h4>
+                                <p>Identified and corrected batch effects that were reversing the direction
+                                of significance for 15% of differentially expressed genes. This preprocessing
+                                framework now underpins all subsequent analysis projects.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pc-actions">
+                    <a href="https://github.com/BhuwanShar" target="_blank" rel="noopener" class="action-link">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                        Source
+                    </a>
+                    <button class="expand-btn" data-target="details-stats">
+                        <span>Details</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                    </button>
+                </div>
+            </article>
+
+            <article class="project-card glass-card" data-tags="gnn">
+                <div class="pc-status">
+                    <span class="status-indicator active"></span>
+                    <span>In Progress</span>
+                </div>
+                <div class="pc-content">
+                    <h3>DNABERT Promoter Sequence Embeddings</h3>
+                    <p class="pc-desc">
+                        Leveraging pre-trained DNA language models to generate promoter-region 
+                        sequence embeddings for each gene, integrated as node features in the 
+                        GNN biomarker discovery pipeline alongside expression and ontology features.
+                    </p>
+                    <div class="pc-tech">
+                        <span>DNABERT</span>
+                        <span>Transformers</span>
+                        <span>HuggingFace</span>
+                        <span>Python</span>
+                        <span>CUDA</span>
+                    </div>
+                    <div class="pc-details" id="details-dnabert">
+                        <div class="detail-grid">
+                            <div class="detail-block">
+                                <h4>Motivation</h4>
+                                <p>Gene expression is partly determined by promoter sequence features — 
+                                transcription factor binding sites, GC content, CpG islands. DNABERT 
+                                encodes these sequence-level signals into dense representations that 
+                                complement expression-based and ontological features.</p>
+                            </div>
+                            <div class="detail-block">
+                                <h4>Approach</h4>
+                                <p>Upstream promoter sequences (2kb) extracted per gene, tokenized 
+                                with k-mer tokenization, encoded with DNABERT, and projected to 128 
+                                dimensions for concatenation with expression z-scores and GO embeddings.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pc-actions">
+                    <button class="expand-btn" data-target="details-dnabert">
+                        <span>Details</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                    </button>
+                </div>
+            </article>
+
+            <article class="project-card glass-card" data-tags="spectral ontology">
+                <div class="pc-content">
+                    <h3>Multi-Network Heterogeneous Graph Fusion</h3>
+                    <p class="pc-desc">
+                        Principled fusion of PPI, co-expression, and regulatory network layers into 
+                        a single heterogeneous graph for downstream GNN training — addressing the 
+                        challenge of combining networks with different noise profiles and edge semantics.
+                    </p>
+                    <div class="pc-tech">
+                        <span>PyTorch Geometric</span>
+                        <span>NetworkX</span>
+                        <span>Heterogeneous GNN</span>
+                        <span>Python</span>
+                    </div>
+                    <div class="pc-details" id="details-hetero">
+                        <div class="detail-grid">
+                            <div class="detail-block">
+                                <h4>Motivation</h4>
+                                <p>PPI, co-expression, and transcriptional regulatory networks capture 
+                                complementary aspects of gene function but differ fundamentally in 
+                                their noise characteristics and biological semantics. Naive edge 
+                                union conflates these differences.</p>
+                            </div>
+                            <div class="detail-block">
+                                <h4>Approach</h4>
+                                <p>Heterogeneous graph construction with typed edges per network layer. 
+                                Separate message-passing per edge type, with learned aggregation weights 
+                                allowing the model to up- or down-weight each network type by task.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pc-actions">
+                    <button class="expand-btn" data-target="details-hetero">
+                        <span>Details</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                    </button>
+                </div>
+            </article>
 
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- SKILLS -->
-    <section id="skills" class="section">
-        <div class="section-header">
-            <span class="section-number">05</span>
-            <span class="section-dash">-</span>
-            <h2>Technical Expertise</h2>
+<!-- RESEARCH PIPELINE -->
+<section class="section" id="pipeline">
+    <div class="section-header">
+        <h2 class="section-title">Research Pipeline</h2>
+        <div class="section-line"></div>
+    </div>
+    <div class="section-content">
+        <p class="section-lead">End-to-end computational pipeline from raw biological data to actionable predictions.</p>
+        <div class="pipeline-container">
+            <div class="pipeline-track">
+                <div class="pipeline-step" data-step="1">
+                    <div class="step-node">
+                        <div class="step-icon">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+                        </div>
+                        <div class="step-pulse"></div>
+                    </div>
+                    <div class="step-info">
+                        <h4>Gene Expression Data</h4>
+                        <p>RNA-seq count matrices, microarray profiles, TCGA datasets</p>
+                    </div>
+                </div>
+                <div class="pipeline-connector"><div class="connector-flow"></div></div>
+                <div class="pipeline-step" data-step="2">
+                    <div class="step-node">
+                        <div class="step-icon">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18"/></svg>
+                        </div>
+                        <div class="step-pulse"></div>
+                    </div>
+                    <div class="step-info">
+                        <h4>DEG Analysis</h4>
+                        <p>DESeq2, limma-voom, variance-stabilizing transforms, batch correction</p>
+                    </div>
+                </div>
+                <div class="pipeline-connector"><div class="connector-flow"></div></div>
+                <div class="pipeline-step" data-step="3">
+                    <div class="step-node">
+                        <div class="step-icon">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="5" cy="12" r="2"/><circle cx="19" cy="5" r="2"/><circle cx="19" cy="19" r="2"/><path d="M7 12h10M17.2 6.8L6.8 11.2M17.2 17.2L6.8 12.8"/></svg>
+                        </div>
+                        <div class="step-pulse"></div>
+                    </div>
+                    <div class="step-info">
+                        <h4>Network Construction</h4>
+                        <p>PPI from STRING, GRN inference, PCnet co-expression networks</p>
+                    </div>
+                </div>
+                <div class="pipeline-connector"><div class="connector-flow"></div></div>
+                <div class="pipeline-step" data-step="4">
+                    <div class="step-node">
+                        <div class="step-icon">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        </div>
+                        <div class="step-pulse"></div>
+                    </div>
+                    <div class="step-info">
+                        <h4>GO Enrichment</h4>
+                        <p>clusterProfiler, IC-weighted embeddings, ontology-aware features</p>
+                    </div>
+                </div>
+                <div class="pipeline-connector"><div class="connector-flow"></div></div>
+                <div class="pipeline-step" data-step="5">
+                    <div class="step-node">
+                        <div class="step-icon">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                        </div>
+                        <div class="step-pulse"></div>
+                    </div>
+                    <div class="step-info">
+                        <h4>Embedding Generation</h4>
+                        <p>GO embeddings, DNABERT promoter features, expression z-scores</p>
+                    </div>
+                </div>
+                <div class="pipeline-connector"><div class="connector-flow"></div></div>
+                <div class="pipeline-step" data-step="6">
+                    <div class="step-node">
+                        <div class="step-icon">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="9" height="9" rx="1"/><rect x="13" y="2" width="9" height="9" rx="1"/><rect x="2" y="13" width="9" height="9" rx="1"/><rect x="13" y="13" width="9" height="9" rx="1"/></svg>
+                        </div>
+                        <div class="step-pulse"></div>
+                    </div>
+                    <div class="step-info">
+                        <h4>Graph Neural Networks</h4>
+                        <p>GCN, GAT with residual connections, attention-based edge ranking</p>
+                    </div>
+                </div>
+                <div class="pipeline-connector"><div class="connector-flow"></div></div>
+                <div class="pipeline-step" data-step="7">
+                    <div class="step-node">
+                        <div class="step-icon">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+                        </div>
+                        <div class="step-pulse"></div>
+                    </div>
+                    <div class="step-info">
+                        <h4>Biomarker Prediction</h4>
+                        <p>Node classification, subnetwork ranking, disease gene prioritization</p>
+                    </div>
+                </div>
+                <div class="pipeline-connector"><div class="connector-flow"></div></div>
+                <div class="pipeline-step" data-step="8">
+                    <div class="step-node">
+                        <div class="step-icon">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>
+                        </div>
+                        <div class="step-pulse"></div>
+                    </div>
+                    <div class="step-info">
+                        <h4>Explainability</h4>
+                        <p>Attention visualization, subgraph extraction, pathway mapping</p>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="skills-container">
-            <div class="skill-category">
-                <div class="skill-cat-header">
-                    <h4>Programming Languages</h4>
-                    <div class="skill-cat-line"></div>
-                </div>
-                <div class="skill-tags">
-                    <span class="skill-tag lang" data-level="95">Python</span>
-                    <span class="skill-tag lang" data-level="85">R</span>
-                    <span class="skill-tag lang-sec" data-level="60">Bash</span>
-                    <span class="skill-tag lang-sec" data-level="55">C</span>
-                    <span class="skill-tag lang-sec" data-level="50">Java</span>
-                </div>
-            </div>
-            <div class="skill-category">
-                <div class="skill-cat-header">
-                    <h4>Bioinformatics</h4>
-                    <div class="skill-cat-line"></div>
-                </div>
-                <div class="skill-tags">
-                    <span class="skill-tag bio">limma</span>
-                    <span class="skill-tag bio">DESeq2</span>
-                    <span class="skill-tag bio">clusterProfiler</span>
-                    <span class="skill-tag bio">biomaRt</span>
-                </div>
-            </div>
-            <div class="skill-category">
-                <div class="skill-cat-header">
-                    <h4>Machine Learning</h4>
-                    <div class="skill-cat-line"></div>
-                </div>
-                <div class="skill-tags">
-                    <span class="skill-tag ml">PyTorch</span>
-                    <span class="skill-tag ml">scikit-learn</span>
-                    <span class="skill-tag ml">Transformers</span>
-                    <span class="skill-tag ml">PyTorch Geometric</span>
-                </div>
-            </div>
-            <div class="skill-category">
-                <div class="skill-cat-header">
-                    <h4>Systems & Tools</h4>
-                    <div class="skill-cat-line"></div>
-                </div>
-                <div class="skill-tags">
-                    <span class="skill-tag tools">Linux</span>
-                    <span class="skill-tag tools">Git</span>
-                    <span class="skill-tag tools">Conda</span>
-                    <span class="skill-tag tools">CUDA</span>
-                    <span class="skill-tag tools">Jupyter</span>
-                </div>
-            </div>
-        </div>
-    </section>
+    </div>
+</section>
 
-    <!-- APPROACH -->
-    <section id="approach" class="section">
-        <div class="section-header">
-            <span class="section-number">06</span>
-            <span class="section-dash">-</span>
-            <h2>Approach</h2>
+<!-- TECH STACK -->
+<section class="section" id="techstack">
+    <div class="section-header">
+        <h2 class="section-title">Tech Stack</h2>
+        <div class="section-line"></div>
+    </div>
+    <div class="section-content">
+        <div class="stack-categories">
+            <div class="stack-category glass-card">
+                <h3>
+                    <span class="cat-dot" style="--dot-color: var(--cyan)"></span>
+                    Deep Learning
+                </h3>
+                <div class="stack-items">
+                    <div class="stack-item">
+                        <span class="si-name">PyTorch</span>
+                    </div>
+                    <div class="stack-item">
+                        <span class="si-name">PyTorch Geometric</span>
+                    </div>
+                    <div class="stack-item">
+                        <span class="si-name">DGL</span>
+                    </div>
+                    <div class="stack-item">
+                        <span class="si-name">scikit-learn</span>
+                    </div>
+                    <div class="stack-item">
+                        <span class="si-name">Transformers (HF)</span>
+                    </div>
+                    <div class="stack-item">
+                        <span class="si-name">CUDA / cuSOLVER</span>
+                    </div>
+                </div>
+            </div>
+            <div class="stack-category glass-card">
+                <h3>
+                    <span class="cat-dot" style="--dot-color: var(--green)"></span>
+                    Bioinformatics
+                </h3>
+                <div class="stack-items">
+                    <div class="stack-item">
+                        <span class="si-name">DESeq2</span>
+                    </div>
+                    <div class="stack-item">
+                        <span class="si-name">limma / edgeR</span>
+                    </div>
+                    <div class="stack-item">
+                        <span class="si-name">clusterProfiler</span>
+                    </div>
+                    <div class="stack-item">
+                        <span class="si-name">biomaRt</span>
+                    </div>
+                    <div class="stack-item">
+                        <span class="si-name">Bioconductor</span>
+                    </div>
+                    <div class="stack-item">
+                        <span class="si-name">ComBat / SVA</span>
+                    </div>
+                </div>
+            </div>
+            <div class="stack-category glass-card">
+                <h3>
+                    <span class="cat-dot" style="--dot-color: var(--violet)"></span>
+                    Network &amp; Graph
+                </h3>
+                <div class="stack-items">
+                    <div class="stack-item">
+                        <span class="si-name">NetworkX</span>
+                    </div>
+                    <div class="stack-item">
+                        <span class="si-name">STRING PPI</span>
+                    </div>
+                    <div class="stack-item">
+                        <span class="si-name">Neo4j</span>
+                    </div>
+                    <div class="stack-item">
+                        <span class="si-name">Cytoscape</span>
+                    </div>
+                    <div class="stack-item">
+                        <span class="si-name">PCnet</span>
+                    </div>
+                </div>
+            </div>
+            <div class="stack-category glass-card">
+                <h3>
+                    <span class="cat-dot" style="--dot-color: var(--amber)"></span>
+                    Languages
+                </h3>
+                <div class="stack-items">
+                    <div class="stack-item">
+                        <span class="si-name">Python</span>
+                    </div>
+                    <div class="stack-item">
+                        <span class="si-name">R</span>
+                    </div>
+                    <div class="stack-item">
+                        <span class="si-name">Bash / Shell</span>
+                    </div>
+                    <div class="stack-item">
+                        <span class="si-name">C</span>
+                    </div>
+                    <div class="stack-item">
+                        <span class="si-name">Java</span>
+                    </div>
+                </div>
+            </div>
+            <div class="stack-category glass-card">
+                <h3>
+                    <span class="cat-dot" style="--dot-color: var(--cyan)"></span>
+                    Infrastructure
+                </h3>
+                <div class="stack-items">
+                    <div class="stack-item">
+                        <span class="si-name">Linux</span>
+                    </div>
+                    <div class="stack-item">
+                        <span class="si-name">Git / GitHub</span>
+                    </div>
+                    <div class="stack-item">
+                        <span class="si-name">Docker</span>
+                    </div>
+                    <div class="stack-item">
+                        <span class="si-name">Conda</span>
+                    </div>
+                    <div class="stack-item">
+                        <span class="si-name">GitHub Actions</span>
+                    </div>
+                </div>
+            </div>
+            <div class="stack-category glass-card">
+                <h3>
+                    <span class="cat-dot" style="--dot-color: var(--green)"></span>
+                    Visualization &amp; APIs
+                </h3>
+                <div class="stack-items">
+                    <div class="stack-item">
+                        <span class="si-name">Streamlit</span>
+                    </div>
+                    <div class="stack-item">
+                        <span class="si-name">Matplotlib / Seaborn</span>
+                    </div>
+                    <div class="stack-item">
+                        <span class="si-name">Plotly</span>
+                    </div>
+                    <div class="stack-item">
+                        <span class="si-name">FastAPI / Flask</span>
+                    </div>
+                    <div class="stack-item">
+                        <span class="si-name">UMAP / t-SNE</span>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="approach-steps">
-            <div class="step" data-step="1">
-                <div class="step-visual">
-                    <canvas class="step-canvas" data-viz="structure" width="64" height="64"></canvas>
-                </div>
-                <div class="step-number">01</div>
-                <div class="step-content">
-                    <h3>Understand the root structure</h3>
-                    <p>Before reaching for algorithms - ask what is the underlying form?? <br>
-                    The answer shapes everything that follows.</p>
-                </div>
-            </div>
-            <div class="step" data-step="2">
-                <div class="step-visual">
-                    <canvas class="step-canvas" data-viz="reduce" width="64" height="64"></canvas>
-                </div>
-                <div class="step-number">02</div>
-                <div class="step-content">
-                    <h3>Reduce to what matters</h3>
-                    <p>High-dimensional biological data carries noise alongside signal.
-                    Spectral methods, dimension reduction, and structured feature
-                    construction isolate what is biologically meaningful.</p>
-                </div>
-            </div>
-            <div class="step" data-step="3">
-                <div class="step-visual">
-                    <canvas class="step-canvas" data-viz="biology" width="64" height="64"></canvas>
-                </div>
-                <div class="step-number">03</div>
-                <div class="step-content">
-                    <h3>Preserve biological meaning</h3>
-                    <p>Mathematical abstraction should serve biology, not replace it.
-                    Every transformation should be interpretable - a principal component
-                    should map back to a gene set, a cluster to a phenotype.</p>
-                </div>
-            </div>
-            <div class="step" data-step="4">
-                <div class="step-visual">
-                    <canvas class="step-canvas" data-viz="impact" width="64" height="64"></canvas>
-                </div>
-                <div class="step-number">04</div>
-                <div class="step-content">
-                    <h3>Build toward impact</h3>
-                    <p>The end goal is not a model - it is insight.
-                    Biomarker discovery, disease understanding, drug target identification.
-                    Computation should ultimately serve human health.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+    </div>
+</section>
 
-    <!-- SPECTRAL EMBEDDING (replaces Philosophy/PCA) -->
-    <section id="spectral" class="section">
-        <div class="section-header">
-            <span class="section-number">07</span>
-            <span class="section-dash">—</span>
-            <h2>Spectral Embedding</h2>
-        </div>
-
-        <div class="spectral-intro">
-            <div class="spectral-quote">
-                <p>"A graph Laplacian's eigenvectors encode geometry.</p>
-                <p>Communities emerge from spectrum, not from labels."</p>
-            </div>
-            <p class="spectral-desc">
-                The interactive below demonstrates how spectral methods extract geometric
-                structure from connectivity. The network's Laplacian matrix is decomposed -
-                its eigenvectors become coordinates in embedding space,
-                revealing clusters that topology alone implies.
-            </p>
-        </div>
-
-        <div class="spectral-interactive">
-            <div class="spectral-panel spectral-3d">
-                <div class="panel-header">
-                    <span class="panel-tag">3D Spectral Embedding</span>
-                    <span class="panel-hint">drag to rotate</span>
-                </div>
-                <canvas id="spectralCanvas" width="700" height="500"></canvas>
-            </div>
-            <div class="spectral-panel spectral-network">
-                <div class="panel-header">
-                    <span class="panel-tag">Network Topology</span>
-                    <span class="panel-hint">hover nodes</span>
-                </div>
-                <canvas id="networkGraphCanvas" width="360" height="360"></canvas>
-            </div>
-            <div class="spectral-panel spectral-spectrum">
-                <div class="panel-header">
-                    <span class="panel-tag">Laplacian Spectrum</span>
-                </div>
-                <canvas id="spectrumCanvas" width="360" height="140"></canvas>
-            </div>
-        </div>
-
-        <div class="spectral-legend">
-            <div class="legend-group">
-                <span><span class="legend-dot" style="background:#00f0ff"></span> Community A</span>
-                <span><span class="legend-dot" style="background:#ff4060"></span> Community B</span>
-                <span><span class="legend-dot" style="background:#ffb000"></span> Community C</span>
-                <span><span class="legend-dot" style="background:#a855f7"></span> Bridge nodes</span>
-            </div>
-            <div class="spectral-equation">
-                L = D − A &nbsp;→&nbsp; Lv = λv &nbsp;→&nbsp; embedding: [v₂, v₃, v₄]
-            </div>
-        </div>
-
-        <div class="philosophy-body">
+<!-- PUBLICATIONS -->
+<section class="section" id="publications">
+    <div class="section-header">
+        <h2 class="section-title">Publications &amp; Preprints</h2>
+        <div class="section-line"></div>
+    </div>
+    <div class="section-content">
+        <div class="pub-placeholder glass-card">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity="0.3"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>
+            <h3>Manuscripts in Preparation</h3>
             <p>
-                Biology is not a benchmark dataset - it is a system where every gene,
-                every interaction, every annotation carries meaning shaped by evolution.
-                The most impactful computational biology comes not from chasing
-                the newest architecture, but from deeply understanding the problem's structure.
+                Research outputs from current projects are being written up for submission. 
+                If you're interested in the methodology or early results, feel free to reach out directly — 
+                I'm happy to share what I can.
             </p>
-            <p>
-                A well-chosen decomposition reveals more than a thousand gradient steps.
-                I prioritize clarity in formulation, disciplined computation,
-                and structured reasoning - because the goal is not just to predict,
-                but to understand.
-            </p>
+            <a href="https://scholar.google.com" target="_blank" rel="noopener" class="pub-link">
+                Google Scholar Profile →
+            </a>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- CONTACT -->
-    <section id="contact" class="section">
-        <div class="section-header">
-            <span class="section-number">08</span>
-            <span class="section-dash">-</span>
-            <h2>Contact</h2>
-        </div>
-        <div class="contact-content">
-            <p class="contact-lead">
-                Interested in collaborative research or have a project in mind?
-            </p>
-            <div class="contact-grid">
-                <a href="mailto:bhuwangautam09@gmail.com" class="contact-card">
-                    <span class="contact-symbol">✉</span>
-                    <span class="contact-label">Email</span>
-                    <span class="contact-value">bhuwangautam09@gmail.com</span>
-                </a>
-                <a href="https://github.com/BhuwanShar" target="_blank" class="contact-card">
-                    <span class="contact-symbol">⟨/⟩</span>
-                    <span class="contact-label">GitHub</span>
-                    <span class="contact-value">BhuwanShar</span>
-                </a>
-                <a href="https://www.linkedin.com/in/bhuwansharma2002" target="_blank" class="contact-card">
-                    <span class="contact-symbol">in</span>
-                    <span class="contact-label">LinkedIn</span>
-                    <span class="contact-value">bhuwansharma2002</span>
-                </a>
-            </div>
-            <div class="contact-areas">
-                <h3>Open for collaboration in:</h3>
-                <ul>
-                    <li>Spectral methods in systems biology</li>
-                    <li>Network-based inference and prediction</li>
-                    <li>Multi-omics data integration</li>
-                    <li>Machine and Deep Learning for biology</li>
-                </ul>
+<!-- INTERACTIVE NETWORK -->
+<section class="section" id="network-viz">
+    <div class="section-header">
+        <h2 class="section-title">Interactive Network</h2>
+        <div class="section-line"></div>
+    </div>
+    <div class="section-content">
+        <p class="section-lead">
+            A simulated protein-protein interaction network. Hover over nodes to explore connections.
+        </p>
+        <div class="network-container glass-card">
+            <canvas id="networkViz" width="800" height="500"></canvas>
+            <div class="network-legend">
+                <span><span class="legend-dot" style="background: var(--cyan)"></span> Hub Gene</span>
+                <span><span class="legend-dot" style="background: var(--green)"></span> Disease Associated</span>
+                <span><span class="legend-dot" style="background: var(--violet)"></span> Predicted Biomarker</span>
             </div>
         </div>
-    </section>
+    </div>
+</section>
+
+<!-- BLOG -->
+<section class="section" id="blog">
+    <div class="section-header">
+        <h2 class="section-title">Research Notes</h2>
+        <div class="section-line"></div>
+    </div>
+    <div class="section-content">
+        <div class="blog-grid">
+            <article class="blog-card glass-card">
+                <div class="blog-meta">
+                    <span class="blog-date">Dec 2024</span>
+                    <span class="blog-tag">GNN</span>
+                </div>
+                <h3>Understanding Oversmoothing in Biological GNNs</h3>
+                <p>Why deep graph neural networks lose discriminative power on biological
+                networks, and what residual connections can — and can't — fix.</p>
+                <span class="blog-read">Read more →</span>
+            </article>
+            <article class="blog-card glass-card">
+                <div class="blog-meta">
+                    <span class="blog-date">Nov 2024</span>
+                    <span class="blog-tag">Methods</span>
+                </div>
+                <h3>PCnet vs Pearson: When Correlation Lies</h3>
+                <p>A practical comparison of PCA-regularized network inference against
+                standard correlation approaches for gene co-expression analysis.</p>
+                <span class="blog-read">Read more →</span>
+            </article>
+            <article class="blog-card glass-card">
+                <div class="blog-meta">
+                    <span class="blog-date">Oct 2024</span>
+                    <span class="blog-tag">Ontology</span>
+                </div>
+                <h3>Making Gene Ontology Learnable</h3>
+                <p>From discrete DAG annotations to dense vector representations:
+                engineering GO features that neural networks can actually use.</p>
+                <span class="blog-read">Read more →</span>
+            </article>
+        </div>
+
+        <!-- TERMINAL -->
+        <div class="terminal glass-card">
+            <div class="terminal-bar">
+                <div class="terminal-dots">
+                    <span style="background:#ff5f57"></span>
+                    <span style="background:#febc2e"></span>
+                    <span style="background:#28c840"></span>
+                </div>
+                <span class="terminal-title">bhuwan@research ~ </span>
+            </div>
+            <div class="terminal-body" id="terminalBody">
+                <div class="terminal-line">
+                    <span class="t-prompt">$</span>
+                    <span class="t-cmd">cat research_summary.json</span>
+                </div>
+                <pre class="t-output">{
+  "researcher": "Bhuwan Sharma",
+  "focus": "Computational Systems Biology",
+  "methods": ["GNN", "Spectral Analysis", "Multi-omics"],
+  "tools": ["PyTorch", "PyG", "R/Bioconductor"],
+  "status": "Building the future of biological AI"
+}</pre>
+                <div class="terminal-line">
+                    <span class="t-prompt">$</span>
+                    <span class="t-cursor">█</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ACHIEVEMENTS -->
+<section class="section" id="achievements">
+    <div class="section-header">
+        <h2 class="section-title">Achievements</h2>
+        <div class="section-line"></div>
+    </div>
+    <!--<div class="section-content">
+        <div class="achievements-grid">
+            <div class="achievement-card glass-card">
+                <div class="ach-icon">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 1.1 2.7 3 6 3s6-1.9 6-3v-5"/></svg>
+                </div>
+                <h4>Academic Excellence</h4>
+                <p>CGPA 7.64 in B.Sc. Zoology (Hons.) with specialization in molecular biology and genetics</p>
+            </div>
+            <div class="achievement-card glass-card">
+                <div class="ach-icon">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 3H5a2 2 0 00-2 2v3m18 0V5a2 2 0 00-2-2h-3m0 18h3a2 2 0 002-2v-3M3 16v3a2 2 0 002 2h3"/></svg>
+                </div>
+                <h4>End-to-End Research Pipeline</h4>
+                <p>Built a complete computational biology pipeline from raw RNA-seq data to biomarker prediction</p>
+            </div>
+            <div class="achievement-card glass-card">
+                <div class="ach-icon">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                </div>
+                <h4>18× GPU Speedup</h4>
+                <p>Achieved 18× acceleration in transcriptome network inference using CUDA-optimized SVD</p>
+            </div>
+            <div class="achievement-card glass-card">
+                <div class="ach-icon">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 3v18h18"/><path d="M7 16l4-8 4 4 5-9"/></svg>
+                </div>
+                <h4>12% AUROC Improvement</h4>
+                <p>Ontology-structured embeddings improved gene function prediction by 8–12% AUROC over expression-only baselines</p>
+            </div>
+        </div>
+    </div>-->
+</section>
+
+<!-- CONTACT -->
+<section class="section" id="contact">
+    <div class="section-header">
+        <h2 class="section-title">Contact</h2>
+        <div class="section-line"></div>
+    </div>
+    <div class="section-content">
+        <div class="contact-grid">
+            <div class="contact-info">
+                <h3>Let's Collaborate</h3>
+                <p>
+                    I'm always open to research discussions, method questions, and collaboration 
+                    on problems in computational biology, graph learning for biological discovery, 
+                    or multi-omics integration. If something I'm working on overlaps with your 
+                    interests, don't hesitate to reach out.
+                </p>
+                <div class="contact-links">
+                    <a href="mailto:bhuwangautam09@gmail.com" class="contact-item glass-card">
+                        <span class="ci-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                        </span>
+                        <div class="ci-info">
+                            <span class="ci-label">Email</span>
+                            <span class="ci-value">bhuwangautam09@gmail.com</span>
+                        </div>
+                        <button class="copy-btn" data-copy="bhuwangautam09@gmail.com" aria-label="Copy email">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                        </button>
+                    </a>
+                    <a href="https://github.com/BhuwanShar" target="_blank" rel="noopener" class="contact-item glass-card">
+                        <span class="ci-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                        </span>
+                        <div class="ci-info">
+                            <span class="ci-label">GitHub</span>
+                            <span class="ci-value">github.com/BhuwanShar</span>
+                        </div>
+                    </a>
+                    <a href="https://www.linkedin.com/in/bhuwansharma2002" target="_blank" rel="noopener" class="contact-item glass-card">
+                        <span class="ci-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                        </span>
+                        <div class="ci-info">
+                            <span class="ci-label">LinkedIn</span>
+                            <span class="ci-value">linkedin.com/in/bhuwansharma2002</span>
+                        </div>
+                    </a>
+                    <div class="contact-item glass-card">
+                        <span class="ci-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        </span>
+                        <div class="ci-info">
+                            <span class="ci-label">Location</span>
+                            <span class="ci-value">Siliguri, West Bengal, India</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="contact-form-wrap">
+                <form class="contact-form glass-card" id="contactForm">
+                    <div class="form-group">
+                        <label for="formName">Name</label>
+                        <input type="text" id="formName" placeholder="Your name" required/>
+                    </div>
+                    <div class="form-group">
+                        <label for="formEmail">Email</label>
+                        <input type="email" id="formEmail" placeholder="your@email.com" required/>
+                    </div>
+                    <div class="form-group">
+                        <label for="formSubject">Subject</label>
+                        <select id="formSubject">
+                            <option>Research Collaboration</option>
+                            <option>Technical Discussion</option>
+                            <option>Job Opportunity</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="formMessage">Message</label>
+                        <textarea id="formMessage" rows="4" placeholder="Your message..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary form-submit">
+                        <span>Send Message</span>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
 
 </main>
 
 <!-- FOOTER -->
-<footer id="siteFooter">
+<footer class="footer">
     <div class="footer-inner">
-        <span class="footer-left">© 2025 Bhuwan Sharma</span>
-        <span class="footer-center">Siliguri, West Bengal, India</span>
-        <span class="footer-right">Crafted with structure in mind</span>
+        <div class="footer-brand">
+            <span class="brand-icon">⬡</span>
+            <span>Bhuwan Sharma</span>
+        </div>
+        <div class="footer-links">
+            <a href="mailto:bhuwangautam09@gmail.com">Email</a>
+            <a href="https://github.com/BhuwanShar" target="_blank" rel="noopener">GitHub</a>
+            <a href="https://www.linkedin.com/in/bhuwansharma2002" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+        <div class="footer-copy">
+            <span>© 2025 Bhuwan Sharma · Computational Systems Biology</span>
+        </div>
     </div>
 </footer>
+
+<!-- TOAST -->
+<div class="toast" id="toast">
+    <span class="toast-msg" id="toastMsg"></span>
+</div>
 
 <script src="script.js"></script>
 </body>
