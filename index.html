@@ -12,7 +12,7 @@
     <link rel="canonical" href="https://bhuwanshar.github.io/Portfolio/index.html">
     <meta name="twitter:card" content="summary_large_image"/>
     <title>Bhuwan Sharma — Computational & Systems Biology</title>
-    <!-- ── FAVICON ───────────────────────────── -->
+    
     <link
         rel="icon"
         href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><defs><linearGradient id="g" x1="0%25" y1="0%25" x2="100%25" y2="100%25"><stop offset="0%25" stop-color="%2300e5ff"/><stop offset="100%25" stop-color="%237c3aed"/></linearGradient></defs><polygon points="32,6 52,18 52,46 32,58 12,46 12,18" fill="none" stroke="url(%23g)" stroke-width="4"/></svg>'
@@ -24,19 +24,15 @@
 </head>
 <body>
 
-<!-- PARTICLE CANVAS -->
+
 <canvas id="networkCanvas"></canvas>
 
-<!-- CURSOR GLOW -->
+
 <div class="cursor-glow" id="cursorGlow"></div>
 
 <!-- NAV -->
 <nav class="nav" id="mainNav">
     <div class="nav-inner">
-        <a href="#hero" class="nav-brand">
-            <span class="brand-icon">⬡</span>
-            <span class="brand-text">Bhuwan Sharma</span>
-        </a>
         <div class="nav-links" id="navLinks">
             <a href="#about" data-section="about">About</a>
             <a href="#research" data-section="research">Research</a>
@@ -63,7 +59,7 @@
     </div>
 </nav>
 
-<!-- HERO -->
+
 <section class="hero" id="hero">
     <div class="hero-bg-effects">
         <div class="hero-gradient-orb orb-1"></div>
@@ -129,29 +125,6 @@
                      id="heroPhoto"
                      loading="eager"/>
                 <div class="photo-fallback" id="photoFallback">BS</div>
-            </div>
-            <div class="hero-float-cards">
-                <div class="float-card fc-1">
-                    <div class="fc-dot"></div>
-                    <span class="fc-text">GNN</span>
-                </div>
-                <div class="float-card fc-2">
-                    <div class="fc-dot"></div>
-                    <span class="fc-text">GRN</span>
-                </div>
-                <div class="float-card fc-3">
-                    <div class="fc-dot"></div>
-                    <span class="fc-text">Biomarker Identification</span>
-                </div>
-                <div class="float-card fc-4">
-                    <div class="fc-dot"></div>
-                    <span class="fc-text">Multi-omics</span>
-                </div>
-                <div class="float-card fc-5">
-                    <div class="fc-dot"></div>
-                    <span class="fc-text">PPI</span>
-                </div>
-            </div>
         </div>
     </div>
     <div class="scroll-indicator" id="scrollIndicator">
@@ -973,19 +946,7 @@
         <h2 class="section-title">Interactive Network</h2>
         <div class="section-line"></div>
     </div>
-    <div class="section-content">
-        <p class="section-lead">
-            A simulated protein-protein interaction network. Hover over nodes to explore connections.
-        </p>
-        <div class="network-container glass-card">
-            <canvas id="networkViz" width="800" height="500"></canvas>
-            <div class="network-legend">
-                <span><span class="legend-dot" style="background: var(--cyan)"></span> Hub Gene</span>
-                <span><span class="legend-dot" style="background: var(--green)"></span> Disease Associated</span>
-                <span><span class="legend-dot" style="background: var(--violet)"></span> Predicted Biomarker</span>
-            </div>
-        </div>
-    </div>
+    
 </section>
 
 <!-- BLOG -->
@@ -1031,11 +992,6 @@
         <!-- TERMINAL -->
         <div class="terminal glass-card">
             <div class="terminal-bar">
-                <div class="terminal-dots">
-                    <span style="background:#ff5f57"></span>
-                    <span style="background:#febc2e"></span>
-                    <span style="background:#28c840"></span>
-                </div>
                 <span class="terminal-title">bhuwan@research ~ </span>
             </div>
             <div class="terminal-body" id="terminalBody">
@@ -1196,7 +1152,6 @@
 <footer class="footer">
     <div class="footer-inner">
         <div class="footer-brand">
-            <span class="brand-icon">⬡</span>
             <span>Bhuwan Sharma</span>
         </div>
         <div class="footer-links">
