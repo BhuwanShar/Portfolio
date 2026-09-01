@@ -15,7 +15,7 @@
     <a href="cv.html">CV</a>
     <a href="research.html">Research</a>
     <a href="software.html">Software</a>
-    <a href="publications.html">Publications</a>
+    <a href="publications.html" class="active">Publications</a>
     <a href="contact.html">Contact</a>
   </div>
   <div class="nav-tools">
@@ -31,7 +31,7 @@
 
 <div class="mob-menu" id="mobMenu">
   <a href="index.html">Home</a>
-  <a href="publications.html">Publications</a>
+  <a href="publications.html" class="active">Publications</a>
   <a href="software.html">Software</a>
   <a href="research.html">Research</a>
   <a href="cv.html">CV</a>
@@ -79,10 +79,79 @@
   <main class="content">
     <h1 class="page-title">Publications &amp; Preprints</h1>
     <p class="page-lede">
-      Manuscripts under peer review. This page will be updated as papers are accepted.
+      Preprints and manuscripts. This page will be updated as papers are accepted.
     </p>
 
-    
+    <div class="pub-list">
+
+      <!-- ═══ Preprint 1 ═══ -->
+      <div class="pub-item" id="pub-lgnm">
+        <span class="pub-year">2026</span>
+        <div class="pub-body">
+          <div class="pub-title">
+            Learnable Graph Network Model (LGNM): A Physics-Constrained Graph Neural Network with Quantum Hamiltonian Learning
+          </div>
+          <div class="pub-authors">
+            <strong>Bhuwan Sharma</strong>, Chiranjib Sarkar
+          </div>
+          <div class="pub-venue">bioRxiv · Cold Spring Harbor Laboratory (2026)</div>
+          <span class="pub-status">Preprint</span>
+
+          <div class="pub-links">
+            <a href="#" class="pub-link" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24"><path d="M14 3h7v7M10 14 21 3M21 14v7H3V3h7"/></svg>
+              bioRxiv
+            </a>
+            <a href="#" class="pub-link" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24"><path d="M12 3v12m0 0-4-4m4 4 4-4M5 21h14"/></svg>
+              PDF
+            </a>
+            <a href="https://lgnm.compbiosysnbu.in/" class="pub-link" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>
+              Web
+            </a>
+
+            <div class="pub-cite" data-cite>
+              <button type="button" class="pub-link" data-cite-toggle aria-expanded="false">
+                <svg viewBox="0 0 24 24"><path d="M3 21V7a4 4 0 0 1 4-4h3v6H6v12H3zm11 0V7a4 4 0 0 1 4-4h3v6h-4v12h-3z"/></svg>
+                Cite
+                <svg class="pub-cite-caret" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg>
+              </button>
+              <div class="pub-cite-menu" role="menu">
+                <button type="button" data-cite-format="bibtex">
+                  <span>BibTeX</span><span class="fmt">.bib</span>
+                </button>
+                <button type="button" data-cite-format="ris">
+                  <span>RIS</span><span class="fmt">.ris</span>
+                </button>
+                <button type="button" data-cite-format="plain">
+                  <span>Plain text</span><span class="fmt">.txt</span>
+                </button>
+                <button type="button" data-cite-toggle-bib>
+                  <span>Show BibTeX</span><span class="fmt">↓</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="pub-bibtex" data-bibtex>
+            <div class="pub-bibtex-header">
+              <span>BibTeX</span>
+              <button type="button" class="pub-bibtex-copy" data-copy-bib>Copy</button>
+            </div>
+<pre>@article{sharma2026learnable,
+  title   = {Learnable Graph Network Model (LGNM): A Physics Constrained Graph Neural Network with Quantum Hamiltonian Learning},
+  author  = {Sharma, Bhuwan and Sarkar, Chiranjib},
+  journal = {bioRxiv},
+  pages   = {2026--07},
+  year    = {2026},
+  publisher = {Cold Spring Harbor Laboratory}
+}</pre>
+          </div>
+        </div>
+      </div>
+
+    </div>
 
   </main>
 </div>
@@ -91,6 +160,132 @@
   <p>© 2026 Bhuwan Sharma</p>
 </footer>
 
+<div class="toast" id="toast">Copied to clipboard</div>
+
 <script src="script.js"></script>
+<script>
+/* ─── Publications — cite dropdown, copy & download ─── */
+(function () {
+  const citations = {
+    'pub-lgnm': {
+      bibtex: `@article{sharma2026learnable,
+  title   = {Learnable Graph Network Model (LGNM): A Physics Constrained Graph Neural Network with Quantum Hamiltonian Learning},
+  author  = {Sharma, Bhuwan and Sarkar, Chiranjib},
+  journal = {bioRxiv},
+  pages   = {2026--07},
+  year    = {2026},
+  publisher = {Cold Spring Harbor Laboratory}
+}`,
+      ris: `TY  - JOUR
+AU  - Sharma, Bhuwan
+AU  - Sarkar, Chiranjib
+TI  - Learnable Graph Network Model (LGNM): A Physics Constrained Graph Neural Network with Quantum Hamiltonian Learning
+JO  - bioRxiv
+PY  - 2026
+SP  - 2026-07
+PB  - Cold Spring Harbor Laboratory
+ER  -`,
+      plain: `Sharma, B., & Sarkar, C. (2026). Learnable Graph Network Model (LGNM): A Physics Constrained Graph Neural Network with Quantum Hamiltonian Learning. bioRxiv, 2026-07. Cold Spring Harbor Laboratory.`,
+      slug: 'sharma2026-lgnm'
+    }
+  };
+
+  const extMap  = { bibtex: 'bib', ris: 'ris', plain: 'txt' };
+  const mimeMap = { bibtex: 'application/x-bibtex', ris: 'application/x-research-info-systems', plain: 'text/plain' };
+
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    if (!t) return;
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(t._to);
+    t._to = setTimeout(() => t.classList.remove('show'), 1800);
+  }
+
+  function copyText(text) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      return navigator.clipboard.writeText(text);
+    }
+    return new Promise((resolve) => {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand('copy'); } catch (e) {}
+      document.body.removeChild(ta);
+      resolve();
+    });
+  }
+
+  function download(text, filename, mime) {
+    const blob = new Blob([text], { type: mime });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(() => URL.revokeObjectURL(url), 500);
+  }
+
+  document.querySelectorAll('[data-cite]').forEach(cite => {
+    const toggle = cite.querySelector('[data-cite-toggle]');
+    toggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      document.querySelectorAll('[data-cite].open').forEach(c => {
+        if (c !== cite) c.classList.remove('open');
+      });
+      cite.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', cite.classList.contains('open'));
+    });
+
+    cite.querySelectorAll('[data-cite-format]').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const fmt = btn.dataset.citeFormat;
+        const item = cite.closest('.pub-item');
+        const data = citations[item.id];
+        if (!data) return;
+        download(data[fmt], `${data.slug}.${extMap[fmt]}`, mimeMap[fmt]);
+        cite.classList.remove('open');
+        showToast(`Downloaded ${fmt.toUpperCase()}`);
+      });
+    });
+
+    const bibToggleBtn = cite.querySelector('[data-cite-toggle-bib]');
+    if (bibToggleBtn) {
+      bibToggleBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const item = cite.closest('.pub-item');
+        const bib = item.querySelector('[data-bibtex]');
+        bib.classList.toggle('open');
+        bibToggleBtn.querySelector('span:first-child').textContent =
+          bib.classList.contains('open') ? 'Hide BibTeX' : 'Show BibTeX';
+        cite.classList.remove('open');
+      });
+    }
+  });
+
+  document.querySelectorAll('[data-copy-bib]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const pre = btn.closest('[data-bibtex]').querySelector('pre');
+      copyText(pre.textContent).then(() => showToast('BibTeX copied'));
+    });
+  });
+
+  document.addEventListener('click', () => {
+    document.querySelectorAll('[data-cite].open').forEach(c => c.classList.remove('open'));
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('[data-cite].open').forEach(c => c.classList.remove('open'));
+    }
+  });
+})();
+</script>
 </body>
 </html>
